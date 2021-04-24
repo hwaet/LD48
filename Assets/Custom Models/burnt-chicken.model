@@ -2,7 +2,7 @@
 
 :materials
 
-[name:brownDark;color:RGBA(0.221, 0.155, 0.155, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownDark;color:RGBA(0.138, 0.095, 0.095, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
 [name:brownLight;color:RGBA(0.255, 0.196, 0.132, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
 
 :models
