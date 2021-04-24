@@ -5,7 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class HandBehavior : MonoBehaviour
 {
-    public KeyCode interact;
+    public enum Zone {
+        Cooler,
+        Breading,
+        Frier,
+        Prep,
+        Platting,
+        Delivery,
+        Trash,
+        Other
+    }
 
     public enum Hand {
         Left,
@@ -13,6 +22,7 @@ public class HandBehavior : MonoBehaviour
     }
 
     public Hand hand;
+    public Zone zone;
 
     public float moveSpeed;
     public float dragSpeed;
@@ -46,6 +56,12 @@ public class HandBehavior : MonoBehaviour
 
     public new Rigidbody rigidbody;
     public new Collider collider;
+
+    [Header("Layer Masks")]
+    public LayerMask frierZoneMask;
+    public LayerMask coolerZoneMask;
+    public LayerMask foodZoneMask;
+    public LayerMask plateZoneMask;
 
 
     // Start is called before the first frame update
@@ -93,22 +109,40 @@ public class HandBehavior : MonoBehaviour
     void InteractPressed () {
         if (holding == null) {
             RaycastHit hit;
-            Debug.DrawRay(this.transform.position, -this.transform.up, Color.red);
-            if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10f)) {
-                //Debug.Log("SphereCast Hit:" + hit.transform.name);
-                switch (hit.transform.tag) {
-                    case "food":
-                        FoodBehavior fb = hit.transform.GetComponent<FoodBehavior>();
-                        if (!fb.cooking) {
+            switch (zone) {
+                case Zone.Frier:
+                    if(Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~frierZoneMask)) {
+                        if (hit.transform.tag == "fryBasket") {
                             StartCoroutine(PickupAnimation(hit.transform.gameObject));
                         }
-                        break;
-                    case "fryBasket":
-                    case "cooler":
-                    case "plate":
-                        StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                        break;
-                }
+                    }
+                    break;
+
+                case Zone.Cooler:
+                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~coolerZoneMask)) {
+                        if (hit.transform.tag == "cooler") {
+                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                        }
+                    }
+                    break;
+
+
+                case Zone.Prep:
+                case Zone.Breading:
+                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~foodZoneMask)) {
+                        if (hit.transform.tag == "food") {
+                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                        }
+                    }
+                    break;
+
+                case Zone.Platting:
+                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~plateZoneMask)) {
+                        if (hit.transform.tag == "plate") {
+                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                        }
+                    }
+                    break;
             }
         }
         else {
@@ -195,7 +229,7 @@ public class HandBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         Debug.LogFormat("Hand Entered a Trigger: {0}",other.transform.name);
         if (PickingUp) {
-            if(other.gameObject == pickupTarget) {
+            if (other.gameObject == pickupTarget) {
                 switch (pickupTarget.tag) {
                     case "cooler":
                         CoolerBehavior cb = pickupTarget.GetComponent<CoolerBehavior>();
@@ -208,6 +242,72 @@ public class HandBehavior : MonoBehaviour
                         break;
                 }
             }
+        }
+
+        if(other.tag == "zone") {
+            switch (other.name) {
+                case "CoolerZone":
+                    zone = Zone.Cooler;
+                    break;
+                case "BreadingZone":
+                    zone = Zone.Breading;
+                    break;
+                case "FrierZone":
+                    zone = Zone.Frier;
+                    break;
+                case "PrepZone":
+                    zone = Zone.Prep;
+                    break;
+                case "PlatingZone":
+                    zone = Zone.Platting;
+                    break;
+                case "DeliveryZone":
+                    zone = Zone.Delivery;
+                    break;
+                case "TrashZone":
+                    zone = Zone.Trash;
+                    break;
+                default:
+                    zone = Zone.Other;
+                    break;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if (other.tag == "zone") {
+            switch (other.name) {
+                case "CoolerZone":
+                    zone = Zone.Cooler;
+                    break;
+                case "BreadingZone":
+                    zone = Zone.Breading;
+                    break;
+                case "FrierZone":
+                    zone = Zone.Frier;
+                    break;
+                case "PrepZone":
+                    zone = Zone.Prep;
+                    break;
+                case "PlatingZone":
+                    zone = Zone.Platting;
+                    break;
+                case "DeliveryZone":
+                    zone = Zone.Delivery;
+                    break;
+                case "TrashZone":
+                    zone = Zone.Trash;
+                    break;
+                default:
+                    zone = Zone.Other;
+                    break;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if(other.tag == "zone") {
+            zone = Zone.Other;
         }
     }
 }

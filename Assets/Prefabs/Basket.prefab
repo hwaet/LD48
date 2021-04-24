@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 485399687}
   - component: {fileID: 485399688}
   - component: {fileID: 485399689}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Basket
   m_TagString: fryBasket
   m_Icon: {fileID: 0}
@@ -200,6 +200,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4e814926a1272f648bc90109fcf0de1c, type: 3}
       propertyPath: m_Name
       value: BasketModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4e814926a1272f648bc90109fcf0de1c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4e814926a1272f648bc90109fcf0de1c, type: 3}
       propertyPath: m_TagString

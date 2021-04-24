@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1120535073508836386}
   - component: {fileID: 217773371215096872}
   - component: {fileID: 7002484420207117718}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6666479043763854059}
   - component: {fileID: 6666479043763854057}
   - component: {fileID: 6666479043763854052}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44032a4bf7d7c243a31617da64cde5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interact: 101
   hand: 0
+  zone: 0
   moveSpeed: 5
   dragSpeed: 2
   pickupSpeed: 1
@@ -166,3 +166,15 @@ MonoBehaviour:
   pickUpDistance: 4
   rigidbody: {fileID: 0}
   collider: {fileID: 0}
+  frierZoneMask:
+    serializedVersion: 2
+    m_Bits: 64
+  coolerZoneMask:
+    serializedVersion: 2
+    m_Bits: 128
+  foodZoneMask:
+    serializedVersion: 2
+    m_Bits: 256
+  plateZoneMask:
+    serializedVersion: 2
+    m_Bits: 2048

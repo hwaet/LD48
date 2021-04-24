@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 71085736915910887}
   - component: {fileID: 71085736915910880}
   - component: {fileID: 1554929112170920336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: chickenLeg
   m_TagString: food
   m_Icon: {fileID: 0}
