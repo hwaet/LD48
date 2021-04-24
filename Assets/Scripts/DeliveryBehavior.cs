@@ -23,4 +23,8 @@ public class DeliveryBehavior : MonoBehaviour
     {
         Debug.Log("Delivered this food:" + deliveredFood.name);
     }
+
+    public void checkOrder(PlateBehavior deliveredFood) {
+        Debug.Log("Delivered this food:" + deliveredFood.name);
+    }
 }
