@@ -23,6 +23,7 @@ public class Grabbable : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         Physics.IgnoreCollision(this.collider, hand.collider, true);
+        this.collider.enabled = true;
         this.rigidbody.isKinematic = true;
         this.rigidbody.useGravity = false;
         this.transform.parent = hand.transform;
