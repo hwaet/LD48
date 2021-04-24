@@ -98,6 +98,11 @@ public class HandBehavior : MonoBehaviour
                 //Debug.Log("SphereCast Hit:" + hit.transform.name);
                 switch (hit.transform.tag) {
                     case "food":
+                        FoodBehavior fb = hit.transform.GetComponent<FoodBehavior>();
+                        if (!fb.cooking) {
+                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                        }
+                        break;
                     case "fryBasket":
                     case "cooler":
                     case "plate":
