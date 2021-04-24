@@ -11,6 +11,13 @@ public class HandBehavior : MonoBehaviour
     public KeyCode right;
     public KeyCode interact;
 
+    public enum Hand {
+        Left,
+        Right
+    }
+
+    public Hand hand;
+
     public float moveSpeed;
     public float dragSpeed;
     private GameObject holding = null;
@@ -28,12 +35,18 @@ public class HandBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float xVal = (Input.GetKey(right) ? 1 : 0) - (Input.GetKey(left) ? 1 : 0);
-        float yVal = (Input.GetKey(down) ? 1 : 0) - (Input.GetKey(up) ? 1 : 0);
-        Vector2 velocity = new Vector2(xVal, yVal);
-        velocity = velocity.normalized;
-        velocity *= holding == null ? moveSpeed : dragSpeed;
-        rigidbody.velocity = velocity;
+        Vector3 vel = rigidbody.velocity;
+        if (hand == Hand.Left) {
+            vel.x = Input.GetAxis("LeftHandHorizontal");
+            vel.z = Input.GetAxis("LeftHandVertical");
+        }
+        else {
+            vel.x = Input.GetAxis("RightHandHorizontal");
+            vel.z = Input.GetAxis("RightHandVertical");
+        }
+        vel = vel.normalized;
+        vel *= holding == null ? moveSpeed : dragSpeed;
+        rigidbody.velocity = vel;
 
         if(Input.GetKey(interact)) {
             if (holding == null) {
