@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 2b5bb18a44d2739499830b33e8ef7a4b, type: 3}
   sceneNames:
   - stage_02
-  stageSettings: {fileID: 0}
+  stageSettings: {fileID: 11400000, guid: fd9b7b1813e26b34aa05f786232cf386, type: 2}
   backgrounds:
   - {fileID: 102900000, guid: 40fc6844395cf8346be5746d9b323858, type: 3}
   backgroundNames:
