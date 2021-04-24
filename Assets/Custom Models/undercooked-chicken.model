@@ -1,0 +1,10 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:brownDark;color:RGBA(0.828, 0.632, 0.632, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownLight;color:RGBA(0.959, 0.873, 0.780, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+
+:models
+
+[name:;collection:food;type:wholerHam;position:(0.0000, 0.0000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:brownDark+brownLight;]

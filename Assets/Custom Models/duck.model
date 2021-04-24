@@ -1,0 +1,12 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:brownDark;color:RGBA(0.676, 0.546, 0.240, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownLight;color:RGBA(0.938, 0.851, 0.755, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:_defaultMat;color:RGBA(1.000, 1.000, 1.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:orange;color:RGBA(1.000, 0.451, 0.227, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+
+:models
+
+[name:;collection:food;type:turkey;position:(-0.1186, 0.0000, 0.4049);rotation:(0.0000, 0.0000, 0.0000);scale:(0.7500, 1.0000, 0.7200);group:;locked:False;hidden:False;materials:brownDark+brownLight;]
