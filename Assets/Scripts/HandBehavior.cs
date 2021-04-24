@@ -110,9 +110,13 @@ public class HandBehavior : MonoBehaviour
     }
 
     void InteractPressed () {
+        if (PickingUp) {
+            return;
+        }
         if (HoldingSomething) {
             switch (holding.tag) {
                 case "food":
+                case "plate":
                     //drop it, contextually?
                     //maybe do the stuffing?
                     Debug.LogFormat("Hand Dropped {0}:", holding.name);
@@ -163,8 +167,15 @@ public class HandBehavior : MonoBehaviour
 
                 case Zone.Platting:
                     if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, plateZoneMask)) {
+                        Debug.LogFormat("Raycast Hit {0}", hit.transform.name);
                         if (hit.transform.tag == "plate") {
-                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                            PlateBehavior plate = hit.transform.GetComponent<PlateBehavior>();
+                            if (!plate.Open) {
+                                StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                            }
+                            else if (plate.contents.Count >0) {
+                                plate.Close();
+                            }
                         }
                     }
                     break;

@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 4414999080727825732}
   - component: {fileID: 3063767041581453721}
   - component: {fileID: 6448757014343964538}
-  m_Layer: 0
+  - component: {fileID: -695344937059599424}
+  - component: {fileID: 7608245458453811009}
+  m_Layer: 11
   m_Name: Plate
   m_TagString: plate
   m_Icon: {fileID: 0}
@@ -115,6 +117,36 @@ MonoBehaviour:
   - {x: 0, y: 0.15, z: 0}
   - {x: 0, y: 0.15, z: 0.25}
   closeTime: 1
+--- !u!114 &-695344937059599424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757828279998803089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087fd58553f11af4b846d2df1e88e794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 0}
+  rigidbody: {fileID: 0}
+--- !u!54 &7608245458453811009
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757828279998803089}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5563583538890685887
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +158,7 @@ GameObject:
   - component: {fileID: 2710922952329307156}
   - component: {fileID: 4149269196481801439}
   - component: {fileID: 5673953862475592037}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

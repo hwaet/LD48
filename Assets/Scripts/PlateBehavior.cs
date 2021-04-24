@@ -16,14 +16,28 @@ public class PlateBehavior : MonoBehaviour
         }
     }
 
+    private bool isOpen = true;
+
+    public bool Open {
+        get { return isOpen; }
+    }
+
     public float closeTime = 1;
 
     private Transform lid;
+    private Grabbable grabbable;
 
     // Start is called before the first frame update
     void Start()
     {
         lid = transform.GetChild(0);
+        grabbable = GetComponent<Grabbable>();
+        grabbable.OnPickup += OnPickup;
+    }
+
+    private void OnPickup(HandBehavior hand) {
+        PlateStackBehavior plateStack = PlateStackBehavior.FindObjectOfType<PlateStackBehavior>();
+        Instantiate(plateStack.platePrefab, this.transform.position, this.transform.rotation);
     }
 
     // Update is called once per frame
@@ -43,6 +57,8 @@ public class PlateBehavior : MonoBehaviour
             lid.rotation = Quaternion.Slerp(startRot, Quaternion.identity, (Time.fixedTime - callTime) / closeTime);
             yield return new WaitForFixedUpdate();
         }
+        isOpen = false;
+
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -64,6 +80,7 @@ public class PlateBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "delivery") {
+            
             DeliveryBehavior delivery = other.transform.GetComponent<DeliveryBehavior>();
             delivery.checkOrder(this);
             //Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());

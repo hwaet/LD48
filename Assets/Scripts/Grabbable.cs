@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grabbable : MonoBehaviour
-{
+public class Grabbable : MonoBehaviour {
     public new Collider collider;
     public new Rigidbody rigidbody;
 
+
+    public delegate void PickupEventHandler(HandBehavior hand);
+
+    public event PickupEventHandler OnPickup;
+
+    public delegate void DropEventHandler(HandBehavior hand);
+
+    public event DropEventHandler OnDrop;
+
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         this.rigidbody = GetComponent<Rigidbody>();
         this.collider = GetComponent<Collider>();
     }
@@ -27,19 +34,20 @@ public class Grabbable : MonoBehaviour
         this.rigidbody.isKinematic = true;
         this.rigidbody.useGravity = false;
         this.transform.parent = hand.transform;
+        OnDrop?.Invoke(hand);
     }
+
 
     public void Drop(HandBehavior hand) {
         StartCoroutine(DropCoroutine(hand));
     }
 
     IEnumerator DropCoroutine(HandBehavior hand) {
+        OnDrop?.Invoke(hand);
         this.transform.parent = null;
         this.rigidbody.isKinematic = false;
         this.rigidbody.useGravity = true;
         yield return new WaitForSeconds(.3f);
         Physics.IgnoreCollision(this.collider, hand.collider, false);
-        
-
     }
 }
