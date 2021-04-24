@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Grabbable))]
 public class FoodBehavior : MonoBehaviour
 {
     public enum Doneness {
@@ -19,12 +19,15 @@ public class FoodBehavior : MonoBehaviour
     public List<string> BreadingLayers = new List<string>();
     public List<FoodBehavior> Stuffings = new List<FoodBehavior>();
 
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
+    private new Collider collider;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rigidbody = GetComponent<Rigidbody>();
+        this.collider = GetComponent<Collider>();
+        
     }
 
     // Update is called once per frame
@@ -33,22 +36,36 @@ public class FoodBehavior : MonoBehaviour
         
     }
 
-    public void Hold() {
-        StartCoroutine(HoldCoroutine());
+    public void Hold(GameObject hand) {
+        StartCoroutine(HoldCoroutine(hand));
     }
 
-    private IEnumerator HoldCoroutine() {
+    private IEnumerator HoldCoroutine(GameObject hand) {
         while(this.rigidbody == null) {
             yield return new WaitForEndOfFrame();
         }
+        Collider handCollider = hand.GetComponent<Collider>();
+        Physics.IgnoreCollision(this.collider, handCollider, true);
+/*
+        this.collider.enabled = false;
         this.rigidbody.useGravity = false;
         this.rigidbody.isKinematic = true;
+*/
         yield break;
     }
 
-    public void Release() {
-        this.rigidbody.useGravity = true;
-        this.rigidbody.isKinematic = false;
+    public void Release(GameObject hand) {
+        /*      this.rigidbody.useGravity = true;
+              this.rigidbody.isKinematic = false;
+              this.collider.enabled = true;*/
+        StartCoroutine(ReleaseCoroutine(hand));
+    }
+
+    private IEnumerator ReleaseCoroutine(GameObject hand) {
+        yield return new WaitForSeconds(.2f);
+        Collider handCollider = hand.GetComponent<Collider>();
+        Physics.IgnoreCollision(this.collider, handCollider, false);
+        yield break;
     }
 
     public void StartCook() {

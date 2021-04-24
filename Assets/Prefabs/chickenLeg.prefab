@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 71085736915910883}
   - component: {fileID: 71085736915910887}
   - component: {fileID: 71085736915910880}
+  - component: {fileID: 1554929112170920336}
   m_Layer: 0
   m_Name: chickenLeg
   m_TagString: food
@@ -132,3 +133,17 @@ MonoBehaviour:
   cooking: 0
   BreadingLayers: []
   Stuffings: []
+--- !u!114 &1554929112170920336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882113749476736007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087fd58553f11af4b846d2df1e88e794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 0}
+  rigidbody: {fileID: 0}
