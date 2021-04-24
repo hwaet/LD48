@@ -19,10 +19,12 @@ public class FoodBehavior : MonoBehaviour
     public List<string> BreadingLayers = new List<string>();
     public List<FoodBehavior> Stuffings = new List<FoodBehavior>();
 
+    private Rigidbody rigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -32,15 +34,25 @@ public class FoodBehavior : MonoBehaviour
     }
 
     public void StartCook() {
+        Debug.Log("Start Cooking");
         StartCoroutine(Cooking());
     }
 
     public void StopCook() {
+        Debug.Log("Stop Cooking");
         cooking = false;
     }
 
     public void Stuff(FoodBehavior other) {
         Stuffings.Add(other);
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if(collision.transform.tag == "plate") {
+            this.rigidbody.isKinematic = true;
+            this.transform.parent = collision.transform;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -51,9 +63,12 @@ public class FoodBehavior : MonoBehaviour
             case "egg":
             case "bread":
             case "spice":
+                Debug.LogFormat("Adding {0} to Breading Layers", other.tag);
                 BreadingLayers.Add(other.tag);
                 break;
             case "service":
+                Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
+                Destroy(this.gameObject);
                 break;
 
         }
@@ -73,11 +88,13 @@ public class FoodBehavior : MonoBehaviour
                 case Doneness.Raw:
                     if(Time.time - startTime > cookTime) {
                         doneness = Doneness.Cooked;
+                        Debug.Log("Cooked");
                     }
                     break;
                 case Doneness.Cooked:
                     if (Time.time - startTime > cookTime * 2) {
                         doneness = Doneness.Burnt;
+                        Debug.Log("Burnt");
                     }
                     break;
             }

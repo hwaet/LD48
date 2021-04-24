@@ -11,6 +11,8 @@ TagManager:
   - egg
   - bread
   - spice
+  - delivery
+  - plate
   layers:
   - Default
   - TransparentFX

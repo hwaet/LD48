@@ -5,10 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class HandBehavior : MonoBehaviour
 {
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode right;
     public KeyCode interact;
 
     public enum Hand {
@@ -48,22 +44,41 @@ public class HandBehavior : MonoBehaviour
         vel *= holding == null ? moveSpeed : dragSpeed;
         rigidbody.velocity = vel;
 
-        if(Input.GetKey(interact)) {
+        
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(interact)) {
+            Debug.Log("Hand Interacting!");
             if (holding == null) {
                 RaycastHit hit;
-                if (Physics.Raycast(this.transform.position, -this.transform.up, out hit)) {
-                    switch(hit.transform.tag) {
+                if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 5)) {
+                    Debug.Log("SphereCast Hit:" + hit);
+                    switch (hit.transform.tag) {
                         case "food":
                         case "basket":
+                            Debug.LogFormat("Hand got a: {0}", hit.transform.tag);
                             this.holding = hit.transform.gameObject;
+                            Rigidbody rb = holding.GetComponent<Rigidbody>();
+                            if (rb != null) {
+                                rb.isKinematic = true;
+                            }
+                            Vector3 pos = this.holding.transform.position;
+                            pos.y = 1;
+                            this.holding.transform.position = pos;
                             hit.transform.parent = this.transform;
                             break;
                     }
                 }
             }
             else {
+                Debug.Log("Hand Dropped");
                 this.holding.transform.parent = null;
                 this.holding = null;
+                Rigidbody rb = holding.GetComponent<Rigidbody>();
+                if(rb != null) {
+                    rb.isKinematic = false;
+                }
             }
         }
     }
