@@ -47,7 +47,7 @@ public class PlateBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         Debug.LogFormat("{0} Landed on a plate", collision.transform.name);
-        if(collision.transform.tag == "food") {
+        if(!OrderFull && collision.transform.tag == "food") {
             FoodBehavior fb = collision.transform.GetComponent<FoodBehavior>();
             contents.Add(fb);
             Collider collider = collision.collider;
@@ -55,6 +55,10 @@ public class PlateBehavior : MonoBehaviour
             collider.transform.parent = this.transform;
             collider.transform.localPosition = snapSlots[contents.Count - 1];
             collider.transform.rotation = Quaternion.identity;
+
+            if(contents.Count == snapSlots.Count) {
+                Close();
+            }
         }
     }
 

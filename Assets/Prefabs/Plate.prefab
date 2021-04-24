@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3063767041581453721}
   - component: {fileID: 6448757014343964538}
   m_Layer: 0
-  m_Name: styrofoam
+  m_Name: Plate
   m_TagString: plate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
