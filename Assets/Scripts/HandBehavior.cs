@@ -111,7 +111,7 @@ public class HandBehavior : MonoBehaviour
             RaycastHit hit;
             switch (zone) {
                 case Zone.Frier:
-                    if(Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~frierZoneMask)) {
+                    if(Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, frierZoneMask)) {
                         if (hit.transform.tag == "fryBasket") {
                             StartCoroutine(PickupAnimation(hit.transform.gameObject));
                         }
@@ -119,7 +119,7 @@ public class HandBehavior : MonoBehaviour
                     break;
 
                 case Zone.Cooler:
-                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~coolerZoneMask)) {
+                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, coolerZoneMask)) {
                         if (hit.transform.tag == "cooler") {
                             StartCoroutine(PickupAnimation(hit.transform.gameObject));
                         }
@@ -129,7 +129,7 @@ public class HandBehavior : MonoBehaviour
 
                 case Zone.Prep:
                 case Zone.Breading:
-                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~foodZoneMask)) {
+                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, foodZoneMask)) {
                         if (hit.transform.tag == "food") {
                             StartCoroutine(PickupAnimation(hit.transform.gameObject));
                         }
@@ -137,7 +137,7 @@ public class HandBehavior : MonoBehaviour
                     break;
 
                 case Zone.Platting:
-                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, ~plateZoneMask)) {
+                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, plateZoneMask)) {
                         if (hit.transform.tag == "plate") {
                             StartCoroutine(PickupAnimation(hit.transform.gameObject));
                         }
