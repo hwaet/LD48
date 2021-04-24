@@ -10,7 +10,7 @@
 [name:brownLight;color:RGBA(0.976, 0.773, 0.549, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
 [name:brownDark;color:RGBA(0.566, 0.196, 0.033, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
 [name:brown;color:RGBA(0.683, 0.414, 0.248, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
-[name:stone;color:RGBA(0.628, 0.312, 0.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:stone;color:RGBA(0.628, 0.312, 0.000, 1.000);scale:(1.0, 1.0);texture:Wood/logs.png;shader:Default;valueA:0.5;valueB:0;]
 
 :models
 
