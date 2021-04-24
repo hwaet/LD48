@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ae34fed1d9d3b43934e7b60537b831, type: 3}
   m_Name: FrozenChicken_Recipe
   m_EditorClassIdentifier: 
-  name: Deep Fried Frozen Chicken
+  recipeName: frozenChicken
   icon: {fileID: 2800000, guid: 215f276adf0330d4d869640568f501a9, type: 3}
   FoodItems:
   - {fileID: 11400000, guid: d2cf1719f394fc04bb212ef33b6ae7b7, type: 2}
+  foodTypeList:
+  - Chicken

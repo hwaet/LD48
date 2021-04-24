@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd6315041f277a4d9e83280f4989a4c, type: 3}
   m_Name: frozenChicken
   m_EditorClassIdentifier: 
-  foodName: frozenChicken
+  foodName: Chicken
   breadings: []
   stuffings: {fileID: 0}
