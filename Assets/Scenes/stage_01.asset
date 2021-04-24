@@ -19,4 +19,4 @@ MonoBehaviour:
   stageSettings: {fileID: 0}
   backgrounds: []
   backgroundNames: []
-  guiIsActive: 0
+  guiIsActive: 1
