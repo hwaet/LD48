@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e782614725db940488141b4fa6c9a001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSceneContainer: {fileID: 0}
-  targetContainer: {fileID: 0}
+  currentSceneContainer: {fileID: 11400000, guid: b8d697b97bec43741b1229c7947cdfe1, type: 2}
+  targetContainer: {fileID: 11400000, guid: b687391a703fba447b9eb95792259fd2, type: 2}
   levelState: 0
 --- !u!4 &781528143
 Transform:
