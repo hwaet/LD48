@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42e4716ff2f250e4786a1ee5ba2f8732, type: 3}
-  m_Name: stage_03_settings
+  m_Name: stage_02_ssettings
   m_EditorClassIdentifier: 
   numberOfActionsAvailable: 1
   stageName: name
   recipesOrders:
-  - {fileID: 11400000, guid: aa72f109a4a5d304d884bdcaa0f05192, type: 2}
+  - {fileID: 11400000, guid: b708bae1bbf44f346b480d8c9016d554, type: 2}
+  - {fileID: 11400000, guid: b708bae1bbf44f346b480d8c9016d554, type: 2}
+  - {fileID: 11400000, guid: 259dbb6986b41a840942c2e767238d18, type: 2}
