@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - loadingScreen
+  - food
+  - frier
+  - basket
+  - egg
+  - bread
+  - spice
   layers:
   - Default
   - TransparentFX
