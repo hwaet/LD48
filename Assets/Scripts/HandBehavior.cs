@@ -76,31 +76,43 @@ public class HandBehavior : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(interact)) {
-            //Debug.Log("Hand Interacting!");
-            if (holding == null) {
-                RaycastHit hit;
-                Debug.DrawRay(this.transform.position, -this.transform.up,Color.red);
-                if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10f)) {
-                    //Debug.Log("SphereCast Hit:" + hit.transform.name);
-                    switch (hit.transform.tag) {
-                        case "food":
-                        case "fryBasket":
-                        case "cooler":
-                        case "plate":
-                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                            break;
-                    }
+        switch (hand) {
+            case Hand.Left:
+                if (Input.GetButtonDown("LeftHandInteract")) {
+                    InteractPressed();
+                }
+                break;
+            case Hand.Right:
+                if (Input.GetButtonDown("RightHandInteract")) {
+                    InteractPressed();
+                }
+                break;
+        }
+    }
+
+    void InteractPressed () {
+        if (holding == null) {
+            RaycastHit hit;
+            Debug.DrawRay(this.transform.position, -this.transform.up, Color.red);
+            if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10f)) {
+                //Debug.Log("SphereCast Hit:" + hit.transform.name);
+                switch (hit.transform.tag) {
+                    case "food":
+                    case "fryBasket":
+                    case "cooler":
+                    case "plate":
+                        StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                        break;
                 }
             }
-            else {  
-                Grabbable grab = this.holding.GetComponent<Grabbable>();
-                if (grab != null) {
-                    grab.Drop(this);
-                }
-                this.holding = null;
-                Debug.Log("Hand Dropped");
+        }
+        else {
+            Grabbable grab = this.holding.GetComponent<Grabbable>();
+            if (grab != null) {
+                grab.Drop(this);
             }
+            this.holding = null;
+            Debug.Log("Hand Dropped");
         }
     }
 
