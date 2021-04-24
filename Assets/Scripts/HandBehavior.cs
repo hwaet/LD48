@@ -52,7 +52,8 @@ public class HandBehavior : MonoBehaviour
             Debug.Log("Hand Interacting!");
             if (holding == null) {
                 RaycastHit hit;
-                if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 5)) {
+                Debug.DrawRay(this.transform.position, -this.transform.up,Color.red);
+                if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10f)) {
                     Debug.Log("SphereCast Hit:" + hit);
                     switch (hit.transform.tag) {
                         case "food":

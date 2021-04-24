@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: stage_03
   m_EditorClassIdentifier: 
   scenes:
-  - {fileID: 102900000, guid: b64c26bb9f92378418a0c99f4b9c8f0f, type: 3}
+  - {fileID: 102900000, guid: 68bbea1c014744f42a908aacfc1a7112, type: 3}
   sceneNames:
   - stage_03
-  stageSettings: {fileID: 11400000, guid: b9223e37c9d18614e820a8f9d0f0cf65, type: 2}
+  stageSettings: {fileID: 0}
   backgrounds: []
   backgroundNames: []
   guiIsActive: 0

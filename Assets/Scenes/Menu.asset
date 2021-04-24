@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Menu
   m_EditorClassIdentifier: 
   scenes:
-  - {fileID: 102900000, guid: 46b094fb5d0b73e4592522beb306bf58, type: 3}
+  - {fileID: 102900000, guid: 344efc3de7486094a865b5711e120214, type: 3}
   sceneNames:
   - menu
   stageSettings: {fileID: 0}
