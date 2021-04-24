@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 71085736915910887}
   - component: {fileID: 71085736915910880}
   - component: {fileID: 1554929112170920336}
+  - component: {fileID: 9202133889790636953}
   m_Layer: 8
   m_Name: chickenLeg
   m_TagString: food
@@ -111,7 +112,7 @@ BoxCollider:
   m_GameObject: {fileID: 882113749476736007}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.44296154, y: 0.5114879, z: 1.0770829}
   m_Center: {x: 0, y: 0.25574395, z: 0}
@@ -147,3 +148,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 0}
   rigidbody: {fileID: 0}
+--- !u!136 &9202133889790636953
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882113749476736007}
+  m_Material: {fileID: 13400000, guid: ee0053e61d658b647b83f31f3ea0ae42, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.21
+  m_Height: 1.25
+  m_Direction: 2
+  m_Center: {x: -0.0000000012355594, y: 0.25574395, z: 9.527206e-10}
