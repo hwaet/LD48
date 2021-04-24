@@ -15,5 +15,4 @@ MonoBehaviour:
   foodName: stuffed turkey
   breadings:
   - breading
-  - eggwash
   stuffings: {fileID: 11400000, guid: 189549ceccaa4224593c2300ca12c524, type: 2}

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Recipe : ScriptableObject
 {
-    public string receipName;
+    public string recipeName;
     public Texture2D icon;
     public List<RecipeComponent> FoodItems;
 

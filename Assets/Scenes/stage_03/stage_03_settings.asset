@@ -15,4 +15,6 @@ MonoBehaviour:
   numberOfActionsAvailable: 1
   stageName: name
   recipesOrders:
+  - {fileID: 11400000, guid: df0210eb3027dc04eb531039b9a7a947, type: 2}
+  - {fileID: 11400000, guid: 17ae28b5954829941822e5ab8adebd93, type: 2}
   - {fileID: 11400000, guid: aa72f109a4a5d304d884bdcaa0f05192, type: 2}
