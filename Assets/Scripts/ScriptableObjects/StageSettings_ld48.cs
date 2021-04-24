@@ -8,6 +8,7 @@ public class StageSettings_ld48 : StageSettings
 {
     public string stageName = "name";
 
+    public List<Recipe> recipesOrders;
 
 	//[Header("SceneContainers")]
 	//public SceneContainer nextSceneContainer;

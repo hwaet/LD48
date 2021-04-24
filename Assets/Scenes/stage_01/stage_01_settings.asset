@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384a43c81aa07f74cb94c6e18bc1f7a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 42e4716ff2f250e4786a1ee5ba2f8732, type: 3}
   m_Name: stage_01_settings
   m_EditorClassIdentifier: 
-  numberOfCustomers: 1
-  timeBetweenCustomers: 5
+  numberOfActionsAvailable: 1
+  stageName: name
+  recipesOrders:
+  - {fileID: 11400000, guid: 27baf830f492dd3438eb74a00e9eb11b, type: 2}
+  - {fileID: 11400000, guid: 27baf830f492dd3438eb74a00e9eb11b, type: 2}
+  - {fileID: 11400000, guid: 27baf830f492dd3438eb74a00e9eb11b, type: 2}
