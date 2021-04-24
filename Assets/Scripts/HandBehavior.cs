@@ -54,10 +54,10 @@ public class HandBehavior : MonoBehaviour
                 RaycastHit hit;
                 Debug.DrawRay(this.transform.position, -this.transform.up,Color.red);
                 if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10f)) {
-                    Debug.Log("SphereCast Hit:" + hit);
+                    Debug.Log("SphereCast Hit:" + hit.transform.name);
                     switch (hit.transform.tag) {
                         case "food":
-                        case "basket":
+                        case "fryBasket":
                             Debug.LogFormat("Hand got a: {0}", hit.transform.tag);
                             this.holding = hit.transform.gameObject;
                             Rigidbody rb = holding.GetComponent<Rigidbody>();
@@ -69,17 +69,24 @@ public class HandBehavior : MonoBehaviour
                             this.holding.transform.position = pos;
                             hit.transform.parent = this.transform;
                             break;
+                        case "cooler":
+                            CoolerBehavior cb = hit.transform.GetComponent<CoolerBehavior>();
+                            GameObject newFood = Instantiate(cb.foodPrefab, this.transform.position, Quaternion.identity, this.transform) as GameObject;
+                            this.holding = newFood;
+                            newFood.GetComponent<FoodBehavior>().Hold();
+                            break;
+
                     }
                 }
             }
             else {
                 Debug.Log("Hand Dropped");
                 this.holding.transform.parent = null;
-                this.holding = null;
-                Rigidbody rb = holding.GetComponent<Rigidbody>();
-                if(rb != null) {
-                    rb.isKinematic = false;
+                FoodBehavior fb = holding.GetComponent<FoodBehavior>();
+                if(fb != null) {
+                    fb.Release();
                 }
+                this.holding = null;
             }
         }
     }

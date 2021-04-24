@@ -33,6 +33,24 @@ public class FoodBehavior : MonoBehaviour
         
     }
 
+    public void Hold() {
+        StartCoroutine(HoldCoroutine());
+    }
+
+    private IEnumerator HoldCoroutine() {
+        while(this.rigidbody == null) {
+            yield return new WaitForEndOfFrame();
+        }
+        this.rigidbody.useGravity = false;
+        this.rigidbody.isKinematic = true;
+        yield break;
+    }
+
+    public void Release() {
+        this.rigidbody.useGravity = true;
+        this.rigidbody.isKinematic = false;
+    }
+
     public void StartCook() {
         Debug.Log("Start Cooking");
         StartCoroutine(Cooking());
@@ -57,7 +75,7 @@ public class FoodBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
        switch(other.tag) {
-            case "frier":
+            case "oil":
                 StartCook();
                 break;
             case "egg":
@@ -66,7 +84,7 @@ public class FoodBehavior : MonoBehaviour
                 Debug.LogFormat("Adding {0} to Breading Layers", other.tag);
                 BreadingLayers.Add(other.tag);
                 break;
-            case "service":
+            case "delivery":
                 Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
                 Destroy(this.gameObject);
                 break;
@@ -75,7 +93,7 @@ public class FoodBehavior : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-        if (other.tag == "frier") {
+        if (other.tag == "oil") {
             StopCook();
         }
     }

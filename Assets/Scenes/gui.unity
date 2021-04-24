@@ -1050,6 +1050,7 @@ GameObject:
   - component: {fileID: 1184507687}
   - component: {fileID: 1184507686}
   - component: {fileID: 1184507685}
+  - component: {fileID: 1184507689}
   m_Layer: 5
   m_Name: GUI Canvas
   m_TagString: Untagged
@@ -1140,6 +1141,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!65 &1184507689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184507684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1214882808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1.069996}
+  m_AnchoredPosition: {x: 0, y: -1.0699997}
   m_SizeDelta: {x: 0, y: -2.1400084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1739924355

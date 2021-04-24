@@ -6,13 +6,14 @@ TagManager:
   tags:
   - loadingScreen
   - food
-  - frier
-  - basket
   - egg
   - bread
   - spice
   - delivery
   - plate
+  - oil
+  - cooler
+  - fryBasket
   layers:
   - Default
   - TransparentFX
