@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeliveryBehavior : MonoBehaviour
 {
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,11 @@ public class DeliveryBehavior : MonoBehaviour
     void Update()
     {
         
+    }
+
+    [ContextMenu("check order")]
+    public void checkOrder(FoodBehavior deliveredFood)
+    {
+        Debug.Log("Delivered this food:" + deliveredFood.name);
     }
 }

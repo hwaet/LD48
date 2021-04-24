@@ -102,8 +102,10 @@ public class FoodBehavior : MonoBehaviour
                 BreadingLayers.Add(other.tag);
                 break;
             case "delivery":
-                Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
-                Destroy(this.gameObject);
+                DeliveryBehavior delivery = other.transform.GetComponent<DeliveryBehavior>();
+                delivery.checkOrder(this);
+                //Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
+                //Destroy(this.gameObject);
                 break;
 
         }
