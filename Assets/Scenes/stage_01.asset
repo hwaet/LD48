@@ -17,6 +17,8 @@ MonoBehaviour:
   sceneNames:
   - stage_01
   stageSettings: {fileID: 0}
-  backgrounds: []
-  backgroundNames: []
+  backgrounds:
+  - {fileID: 102900000, guid: 40fc6844395cf8346be5746d9b323858, type: 3}
+  backgroundNames:
+  - background
   guiIsActive: 1
