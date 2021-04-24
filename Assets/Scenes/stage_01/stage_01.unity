@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 544206246}
   - component: {fileID: 544206245}
   - component: {fileID: 544206249}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChickenCooler
   m_TagString: cooler
   m_Icon: {fileID: 0}
