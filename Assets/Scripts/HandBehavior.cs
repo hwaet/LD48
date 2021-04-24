@@ -29,9 +29,12 @@ public class HandBehavior : MonoBehaviour
     public float pickupSpeed;
     public float hoverHeight;
     public float pickUpDistance;
-    private GameObject holding = null;
-    
 
+    public float dumpRotationTime;
+    public Quaternion dumpAngle;
+
+    private Grabbable holding = null;
+    
     public enum PickupState {
         Idle,
         Seeking,
@@ -107,7 +110,29 @@ public class HandBehavior : MonoBehaviour
     }
 
     void InteractPressed () {
-        if (holding == null) {
+        if (HoldingSomething) {
+            switch (holding.tag) {
+                case "food":
+                    //drop it, contextually?
+                    //maybe do the stuffing?
+                    Debug.LogFormat("Hand Dropped {0}:", holding.name);
+                    holding.Drop(this);
+                    holding = null;
+                    break;
+                case "fryBasket":
+                    if(zone == Zone.Frier) {
+                        Debug.LogFormat("Hand Dropped {0}:", holding.name);
+                        holding.Drop(this);
+                        holding = null;
+                        break;
+                    }
+                    else {
+                        StartCoroutine(DumpBasket());
+                    }
+                    break;
+            }
+        }
+        else { 
             RaycastHit hit;
             switch (zone) {
                 case Zone.Frier:
@@ -145,14 +170,6 @@ public class HandBehavior : MonoBehaviour
                     break;
             }
         }
-        else {
-            Grabbable grab = this.holding.GetComponent<Grabbable>();
-            if (grab != null) {
-                grab.Drop(this);
-            }
-            this.holding = null;
-            Debug.Log("Hand Dropped");
-        }
     }
 
     IEnumerator PickupAnimation(GameObject target) {
@@ -161,7 +178,7 @@ public class HandBehavior : MonoBehaviour
         Vector3 currPos = transform.position;
         Vector3 vel = Vector3.zero;
 
-        Debug.Log("Hand is going in");
+        Debug.LogFormat("{0} Hand is going in", hand);
         while (pickupState == PickupState.Seeking) {
            
             if((currPos - transform.position).magnitude > pickUpDistance || HoldingSomething) {
@@ -175,7 +192,7 @@ public class HandBehavior : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        Debug.Log("Hand is backing out");
+        Debug.LogFormat("{0} Hand is backing out", hand);
         while(transform.position.y < hoverHeight) {
             vel = this.transform.up;
             vel *= pickupSpeed;
@@ -184,13 +201,29 @@ public class HandBehavior : MonoBehaviour
         }
 
         rigidbody.velocity = Vector3.zero;
-        Debug.Log("Done Picking Up");
+        Debug.LogFormat("{0} Hand Done Picking Up", hand);
         pickupState = PickupState.Idle;
         yield break;
     }
 
+    IEnumerator DumpBasket() {
+        Debug.LogFormat("{0} Hand is dumping the basket", hand);
+        float callTime = Time.fixedTime;
+        while(Time.fixedTime - callTime < dumpRotationTime) {
+            rigidbody.MoveRotation(Quaternion.Slerp(Quaternion.identity, dumpAngle, (Time.fixedTime - callTime) / dumpRotationTime));
+            yield return new WaitForFixedUpdate();
+        }
+        callTime = Time.fixedTime;
+        while (Time.fixedTime - callTime < dumpRotationTime) {
+            rigidbody.MoveRotation(Quaternion.Slerp(dumpAngle,Quaternion.identity, (Time.fixedTime - callTime) / dumpRotationTime));
+            yield return new WaitForFixedUpdate();
+        }
+        rigidbody.rotation = Quaternion.identity;
+        yield break;
+    }
+
     private void OnCollisionEnter(Collision collision) {
-        Debug.LogFormat("Hand Hit: {0}", collision.gameObject.name);
+        Debug.LogFormat("{0} Hand Hit: {1}", hand, collision.gameObject.name);
         if (PickingUp) {
             if (collision.gameObject == pickupTarget) {
                 //if the target is food, basket, or plate
@@ -199,12 +232,10 @@ public class HandBehavior : MonoBehaviour
                     case "fryBasket":
                     case "plate":
                         Grabbable grab = pickupTarget.GetComponent<Grabbable>();
-                        if(grab != null) {
-                            grab.Pickup(this);
-                        }
-                        holding = pickupTarget;
+                        grab.Pickup(this);
+                        holding = grab;
                         pickupTarget = null;
-                        Debug.LogFormat("Grabbed the {0}", holding.name);
+                        Debug.LogFormat("Hand {0} Grabbed the {1}", hand, holding.name);
                         break;
 
                     /*case "cooler":
@@ -219,7 +250,7 @@ public class HandBehavior : MonoBehaviour
             }
 
             if(collision.gameObject.name == "PrepSurface") {
-                Debug.Log("Hit the table, Aborting pick up");
+                Debug.LogFormat("{0} Hand Hit the table, Aborting pick up", hand);
                 this.pickupState = PickupState.Returning;
             }
             //if we hit the prep surface abort pickup
@@ -227,18 +258,18 @@ public class HandBehavior : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.LogFormat("Hand Entered a Trigger: {0}",other.transform.name);
+        Debug.LogFormat("{0} Hand Entered a Trigger: {1}", hand, other.transform.name);
         if (PickingUp) {
             if (other.gameObject == pickupTarget) {
                 switch (pickupTarget.tag) {
                     case "cooler":
                         CoolerBehavior cb = pickupTarget.GetComponent<CoolerBehavior>();
                         GameObject newFood = Instantiate(cb.foodPrefab, this.transform.position, Quaternion.identity) as GameObject;
-                        this.holding = newFood;
                         Grabbable grab = newFood.GetComponent<Grabbable>();
                         grab.Pickup(this);
+                        this.holding = grab;
                         pickupTarget = null;
-                        Debug.LogFormat("Grabbed a new {0}", this.holding.name);
+                        Debug.LogFormat("{0} Hand Grabbed a new {1}", hand, this.holding.name);
                         break;
                 }
             }
