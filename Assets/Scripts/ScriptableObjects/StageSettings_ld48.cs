@@ -10,11 +10,19 @@ public class StageSettings_ld48 : StageSettings
 
     public List<Recipe> recipesOrders;
 
-	//[Header("SceneContainers")]
-	//public SceneContainer nextSceneContainer;
+    public GameObject Chicken;
+    public GameObject Duck;
+    public GameObject Turkey;
+    public GameObject Ducken;
+    public GameObject Turducken;
 
-	// Start is called before the first frame update
-	void Start()
+
+
+    //[Header("SceneContainers")]
+    //public SceneContainer nextSceneContainer;
+
+    // Start is called before the first frame update
+    void Start()
     {
         
     }
