@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grabbable : MonoBehaviour {
     public new Collider collider;
+    public Collider[] colliders;
     public new Rigidbody rigidbody;
 
     public delegate void PickupEventHandler(HandBehavior hand);
@@ -26,6 +27,7 @@ public class Grabbable : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         this.rigidbody = GetComponent<Rigidbody>();
+        this.colliders = GetComponents<Collider>();
         this.collider = GetComponent<Collider>();
         layerBak = this.gameObject.layer;
     }
@@ -39,13 +41,17 @@ public class Grabbable : MonoBehaviour {
         while (this.collider == null) {
             yield return new WaitForEndOfFrame();
         }
+        gameObject.layer = hand.gameObject.layer;
+        foreach (Collider collider in colliders) {
+            Physics.IgnoreCollision(collider, hand.collider, true);
+            collider.enabled = true;
+        }
         Physics.IgnoreCollision(this.collider, hand.collider, true);
-        this.gameObject.layer = hand.gameObject.layer;
         this.collider.enabled = true;
-        this.rigidbody.isKinematic = true;
-        this.rigidbody.useGravity = false;
-        this.transform.parent = hand.transform;
-        this.held = true;
+        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
+        transform.parent = hand.transform;
+        held = true;
         OnPickup?.Invoke(hand);
     }
 
@@ -62,21 +68,9 @@ public class Grabbable : MonoBehaviour {
         this.rigidbody.isKinematic = false;
         this.rigidbody.useGravity = true;
         yield return new WaitForSeconds(.3f);
-        Physics.IgnoreCollision(this.collider, hand.collider, false);
-    }
-
-    public void ResetRotation(float rotateTime) {
-        StartCoroutine(ResetRotationCoroutine(rotateTime));
-    }
-
-    IEnumerator ResetRotationCoroutine(float rotateTime) {
-        float callTime = Time.time;
-        Quaternion callRot = transform.rotation;
-
-        while(Time.time - callTime < rotateTime) {
-            this.transform.localRotation = Quaternion.Slerp(callRot, Quaternion.identity, (Time.time - callTime) / rotateTime);
-            yield return new WaitForEndOfFrame();
+        foreach (Collider collider in colliders) {
+            Physics.IgnoreCollision(collider, hand.collider, false);
         }
-        this.transform.rotation = Quaternion.identity;
+        Physics.IgnoreCollision(this.collider, hand.collider, false);
     }
 }

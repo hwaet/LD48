@@ -7,7 +7,7 @@ public class DeliveryBehavior : MonoBehaviour
 {
     SceneWrangler sceneWrangler;
     public bool enforceTime = false;
-    public Queue<Order> orderQueue;
+    public Queue<Order> orderQueue = new Queue<Order>();
 
     public List<Order> activeOrderList = new List<Order>();
     public List<float> orderAddTimes = new List<float>();

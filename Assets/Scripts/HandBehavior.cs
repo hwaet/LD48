@@ -230,8 +230,7 @@ public class HandBehavior : MonoBehaviour
 
         //Debug.LogFormat("{0} Hand is going in", hand);
         while (pickupState == PickupState.Seeking) {
-            if ((currPos - transform.position).magnitude > pickUpDistance || HoldingSomething) {
-                pickupState = PickupState.Returning;
+            if ((currPos - transform.position).magnitude > pickUpDistance || HoldingSomething) {                
                 break;
             }
             vel = target.transform.position - transform.position;
@@ -244,6 +243,7 @@ public class HandBehavior : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        pickupState = PickupState.Returning;
         translationDistance = hoverHeight - transform.position.y;
         rigidbody.rotation = targetRotation;
 
@@ -253,6 +253,7 @@ public class HandBehavior : MonoBehaviour
             rigidbody.MoveRotation(Quaternion.Slerp(targetRotation,
                                         Quaternion.identity,
                                         1 - (hoverHeight - transform.position.y) / translationDistance));
+            Debug.Log("Returning");
             yield return new WaitForFixedUpdate();
         }
 
@@ -263,7 +264,12 @@ public class HandBehavior : MonoBehaviour
     }
 
     IEnumerator DumpBasket() {
-        Debug.LogFormat("{0} Hand is dumping the basket", hand);
+        if (dumping) {
+            yield break;
+        }
+        if(pickupState != PickupState.Idle) {
+            Debug.LogError("What is going on !?");
+        }
         dumping = true;
         float callTime = Time.fixedTime;
         while(Time.fixedTime - callTime < dumpRotationTime) {
@@ -282,82 +288,88 @@ public class HandBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         //Debug.LogFormat("{0} Hand Hit: {1}", hand, collision.gameObject.name);
-        if (Animating) {
-            if (collision.gameObject == pickupTarget) {
-                //if the target is food, basket, or plate
-                switch (pickupTarget.tag) {
-                    case "food":
-                    case "fryBasket":
-                    case "plate":
-                        Grabbable grab = pickupTarget.GetComponent<Grabbable>();
-                        grab.Pickup(this);
-                        holding = grab;
-                        pickupTarget = null;
-                        //Debug.LogFormat("Hand {0} Grabbed the {1}", hand, holding.name);
-                        break;
+        switch (pickupState) {
+            case PickupState.Seeking:
+                if (collision.gameObject == pickupTarget) {
+                    //if the target is food, basket, or plate
+                    switch (pickupTarget.tag) {
+                        case "food":
+                        case "fryBasket":
+                        case "plate":
+                            Grabbable grab = pickupTarget.GetComponent<Grabbable>();
+                            grab.Pickup(this);
+                            holding = grab;
+                            pickupTarget = null;
+                            //Debug.LogFormat("Hand {0} Grabbed the {1}", hand, holding.name);
+                            break;
+                    }
                 }
-            }
-        }
-        else if (collision.gameObject.tag == "hand" && this.HoldingSomething && this.holding.tag == "food") {
-            //Debug.LogFormat("Hand {0} hit the other hand", hand);
-            HandBehavior otherHand = collision.gameObject.GetComponent<HandBehavior>();
+                break;
 
-            if (otherHand.HoldingSomething && otherHand.holding.tag == "food") {
-                FoodBehavior thisFood = holding.GetComponent<FoodBehavior>();
-                FoodBehavior otherFood = otherHand.holding.GetComponent<FoodBehavior>();
-                Debug.LogFormat("We both have food! I Have {0} They have {1}", thisFood.foodType, otherFood.foodType);
-                StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
-                switch (thisFood.foodType, otherFood.foodType) {
-                    
-                    case (FoodBehavior.FoodType.Duck, FoodBehavior.FoodType.Chicken):
-                        //form a ducken
-                        Debug.Log("Form the Ducken!");
-                        GameObject ducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
-                        Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
-                        this.holding = duckenGrabbable;
-                        duckenGrabbable.Pickup(this);
-                        otherHand.holding = null;
-                        Destroy(thisFood.gameObject);
-                        Destroy(otherFood.gameObject);
-                        
+            case PickupState.Idle:
+                if (collision.gameObject.tag == "hand" && this.HoldingSomething && this.holding.tag == "food") {
+                    //Debug.LogFormat("Hand {0} hit the other hand", hand);
+                    HandBehavior otherHand = collision.gameObject.GetComponent<HandBehavior>();
 
-                        break;
-                    case (FoodBehavior.FoodType.Turkey, FoodBehavior.FoodType.Ducken):
-                        Debug.Log("Form the Turducken!");
-                        GameObject turducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
-                        Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
-                        this.holding = turduckenGrabbable;
-                        turduckenGrabbable.Pickup(this);
-                        otherHand.holding = null;
-                        Destroy(thisFood.gameObject);
-                        Destroy(otherFood.gameObject);
+                    if (otherHand.HoldingSomething && otherHand.holding.tag == "food") {
+                        FoodBehavior thisFood = holding.GetComponent<FoodBehavior>();
+                        FoodBehavior otherFood = otherHand.holding.GetComponent<FoodBehavior>();
+                        Debug.LogFormat("We both have food! I Have {0} They have {1}", thisFood.foodType, otherFood.foodType);
+                        StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
+                        switch (thisFood.foodType, otherFood.foodType) {
 
-                        //form the turducken
-                        break;
+                            case (FoodBehavior.FoodType.Duck, FoodBehavior.FoodType.Chicken):
+                                //form a ducken
+                                Debug.Log("Form the Ducken!");
+                                GameObject ducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                                Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
+                                this.holding = duckenGrabbable;
+                                duckenGrabbable.Pickup(this);
+                                otherHand.holding = null;
+                                Destroy(thisFood.gameObject);
+                                Destroy(otherFood.gameObject);
 
+                                break;
+                            case (FoodBehavior.FoodType.Turkey, FoodBehavior.FoodType.Ducken):
+                                Debug.Log("Form the Turducken!");
+                                GameObject turducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                                Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
+                                this.holding = turduckenGrabbable;
+                                turduckenGrabbable.Pickup(this);
+                                otherHand.holding = null;
+                                Destroy(thisFood.gameObject);
+                                Destroy(otherFood.gameObject);
+
+                                //form the turducken
+                                break;
+
+                        }
+
+
+                    }
                 }
-
-
-            }
+                break;
         }
     }
 
     private void OnTriggerEnter(Collider other) {
         //Debug.LogFormat("{0} Hand Entered a Trigger: {1}", hand, other.transform.name);
-        if (Animating) {
-            if (other.gameObject == pickupTarget) {
-                switch (pickupTarget.tag) {
-                    case "cooler":
-                        CoolerBehavior cb = pickupTarget.GetComponent<CoolerBehavior>();
-                        GameObject newFood = Instantiate(cb.foodPrefab, this.transform.position, Quaternion.identity) as GameObject;
-                        Grabbable grab = newFood.GetComponent<Grabbable>();
-                        this.holding = grab;
-                        grab.Pickup(this);
-                        pickupTarget = null;
-                        //Debug.LogFormat("{0} Hand Grabbed a new {1}", hand, this.holding.name);
-                        break;
+        switch (pickupState) {
+            case PickupState.Seeking:
+                if (other.gameObject == pickupTarget) {
+                    switch (pickupTarget.tag) {
+                        case "cooler":
+                            CoolerBehavior cb = pickupTarget.GetComponent<CoolerBehavior>();
+                            GameObject newFood = Instantiate(cb.foodPrefab, this.transform.position, Quaternion.identity) as GameObject;
+                            Grabbable grab = newFood.GetComponent<Grabbable>();
+                            this.holding = grab;
+                            grab.Pickup(this);
+                            pickupTarget = null;
+                            //Debug.LogFormat("{0} Hand Grabbed a new {1}", hand, this.holding.name);
+                            break;
+                    }
                 }
-            }
+                break;
         }
 
         if(other.tag == "zone") {
