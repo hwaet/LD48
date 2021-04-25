@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 0}
   rigidbody: {fileID: 0}
+  holder: {fileID: 0}
 --- !u!114 &8477331832969119019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,11 +131,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodType: 4
-  cookTime: 8
+  cookTime: 10
   doneness: 0
   stuffableWith: 0
   cooking: 0
-  BreadingLayers: []
+  BreadingLayers: 
   Stuffings: []
 --- !u!65 &682480475462835357
 BoxCollider:

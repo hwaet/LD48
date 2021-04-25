@@ -21,6 +21,13 @@ public class FoodBehavior : MonoBehaviour
         Turducken
     }
 
+    public enum BreadingType {
+        Fresh,
+        Breading,
+        Crispy,
+        Spicy
+    }
+
     public FoodType foodType;
     public float cookTime;
     public Doneness doneness;
@@ -33,7 +40,7 @@ public class FoodBehavior : MonoBehaviour
     [HideInInspector()]
     public bool cooking = false;
     [HideInInspector()]
-    public List<string> BreadingLayers = new List<string>();
+    public List<BreadingType> BreadingLayers; 
     [HideInInspector()]
     public List<FoodBehavior> Stuffings = new List<FoodBehavior>();
 
@@ -48,6 +55,7 @@ public class FoodBehavior : MonoBehaviour
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
         this.grabbable = GetComponent<Grabbable>();
+        this.BreadingLayers = new List<BreadingType> { BreadingType.Fresh };
     }
 
     // Update is called once per frame
@@ -114,18 +122,19 @@ public class FoodBehavior : MonoBehaviour
             case "oil":
                 StartCook();
                 break;
-            case "egg":
-            case "bread":
-            case "spice":
+            case "breading":
+                BreadingBehavior bb = other.GetComponent<BreadingBehavior>();
+
+                //TODO - De-dupe breading (don't add duplicate bread layers)
+                this.BreadingLayers.Add(bb.breading);
                 Debug.LogFormat("Adding {0} to Breading Layers", other.tag);
-                BreadingLayers.Add(other.tag);
                 break;
-            case "delivery":
+           /* case "delivery":
                 DeliveryBehavior delivery = other.transform.GetComponent<DeliveryBehavior>();
                 delivery.checkOrder(this);
                 //Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
                 //Destroy(this.gameObject);
-                break;
+                break;*/
 
         }
     }
@@ -140,17 +149,17 @@ public class FoodBehavior : MonoBehaviour
         float startTime = Time.time;
         cooking = true;
         while(cooking) {
-            cookingValue = (Time.time - startTime) / cookTime;
+            cookingValue += Time.deltaTime;
             UpdateMaterial();
             switch (doneness) {
                 case Doneness.Raw:
-                    if(Time.time - startTime > cookTime) {
+                    if(cookingValue > cookTime) {
                         doneness = Doneness.Cooked;
                         Debug.Log("Cooked");
                     }
                     break;
                 case Doneness.Cooked:
-                    if (Time.time - startTime > cookTime * 2) {
+                    if (cookingValue > cookTime * 2) {
                         doneness = Doneness.Burnt;
                         Debug.Log("Burnt");
                     }
@@ -164,8 +173,12 @@ public class FoodBehavior : MonoBehaviour
     {
         foreach (Material material in materials)
         {
-            material.SetFloat("cookedState", cookingValue);
+            material.SetFloat("cookedState", cookingValue / cookTime);
         }
     }
 
+
+    public override string ToString() {
+        return string.Format("{0} {1} with {2}", doneness, foodType, string.Join(",",BreadingLayers));
+    }
 }

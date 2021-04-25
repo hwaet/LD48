@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd6315041f277a4d9e83280f4989a4c, type: 3}
-  m_Name: freshChicken
+  m_Script: {fileID: 11500000, guid: 83ae34fed1d9d3b43934e7b60537b831, type: 3}
+  m_Name: Duck_Order
   m_EditorClassIdentifier: 
-  foodName: Chicken
-  breadings:
-  - breading
-  stuffings: {fileID: 0}
+  recipeName: Fired Duck
+  icon: {fileID: 0}
+  FoodItems:
+  - {fileID: 11400000, guid: fbf0fef66727d234a8c64df313008b09, type: 2}

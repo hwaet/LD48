@@ -15,13 +15,10 @@ MonoBehaviour:
   numberOfActionsAvailable: 1
   stageName: name
   recipesOrders:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 259dbb6986b41a840942c2e767238d18, type: 2}
-  - {fileID: 0}
-  Chicken: {fileID: 882113749476736007, guid: 5b5954732eb967d4785c8482bf9278ed, type: 3}
-  Duck: {fileID: 5754274221369468169, guid: 63b1a81474859594390e1705c7df8586, type: 3}
-  Turkey: {fileID: 5700941242186387313, guid: 7d110d7fe4262c94595aca1e24fff141, type: 3}
-  Ducken: {fileID: 9137498140509798320, guid: fb9db5e9a21b43c4db6a0369eba742e0, type: 3}
-  Turducken: {fileID: 6327214104362133948, guid: 5d38fceebe53c8f41a69912c71c13c6b, type: 3}
+  - {fileID: 11400000, guid: 27baf830f492dd3438eb74a00e9eb11b, type: 2}
+  ChickenPrefab: {fileID: 882113749476736007, guid: 5b5954732eb967d4785c8482bf9278ed, type: 3}
+  DuckPrefab: {fileID: 5754274221369468169, guid: 63b1a81474859594390e1705c7df8586, type: 3}
+  TurkeyPrefab: {fileID: 5700941242186387313, guid: 7d110d7fe4262c94595aca1e24fff141, type: 3}
+  DuckenPrefab: {fileID: 9137498140509798320, guid: fb9db5e9a21b43c4db6a0369eba742e0, type: 3}
+  TurduckenPrefab: {fileID: 6327214104362133948, guid: 5d38fceebe53c8f41a69912c71c13c6b, type: 3}
+  PlatePrefab: {fileID: 2757828279998803089, guid: 4199231c623dc3f4e8a7305eee440e75, type: 3}

@@ -120,14 +120,16 @@ public class HandBehavior : MonoBehaviour
         if (HoldingSomething) {
             switch (holding.tag) {
                 case "food":
-                case "plate":
-                    Debug.LogFormat("Hand Dropped {0}:", holding.name);
                     holding.Drop(this);
+                    holding = null;
+                    break;
+                case "plate":
+                    holding.Drop(this);
+                    holding.rigidbody.AddForce(rigidbody.velocity, ForceMode.Impulse);
                     holding = null;
                     break;
                 case "fryBasket":
                     if(zone == Zone.Frier) {
-                        Debug.LogFormat("Hand Dropped {0}:", holding.name);
                         holding.Drop(this);
                         holding = null;
                         break;
@@ -256,7 +258,6 @@ public class HandBehavior : MonoBehaviour
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.rotation = Quaternion.identity;
-        //Debug.LogFormat("{0} Hand Done Picking Up", hand);
         pickupState = PickupState.Idle;
         yield break;
     }
@@ -280,7 +281,7 @@ public class HandBehavior : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.LogFormat("{0} Hand Hit: {1}", hand, collision.gameObject.name);
+        //Debug.LogFormat("{0} Hand Hit: {1}", hand, collision.gameObject.name);
         if (Animating) {
             if (collision.gameObject == pickupTarget) {
                 //if the target is food, basket, or plate
@@ -292,19 +293,13 @@ public class HandBehavior : MonoBehaviour
                         grab.Pickup(this);
                         holding = grab;
                         pickupTarget = null;
-                        Debug.LogFormat("Hand {0} Grabbed the {1}", hand, holding.name);
+                        //Debug.LogFormat("Hand {0} Grabbed the {1}", hand, holding.name);
                         break;
                 }
             }
-
-            if (collision.gameObject.name == "PrepSurface") {
-                Debug.LogFormat("{0} Hand Hit the table, Aborting pick up", hand);
-                this.pickupState = PickupState.Returning;
-            }
-            //if we hit the prep surface abort pickup
         }
         else if (collision.gameObject.tag == "hand" && this.HoldingSomething && this.holding.tag == "food") {
-            Debug.LogFormat("Hand {0} hit the other hand", hand);
+            //Debug.LogFormat("Hand {0} hit the other hand", hand);
             HandBehavior otherHand = collision.gameObject.GetComponent<HandBehavior>();
 
             if (otherHand.HoldingSomething && otherHand.holding.tag == "food") {
@@ -317,7 +312,7 @@ public class HandBehavior : MonoBehaviour
                     case (FoodBehavior.FoodType.Duck, FoodBehavior.FoodType.Chicken):
                         //form a ducken
                         Debug.Log("Form the Ducken!");
-                        GameObject ducken = Instantiate(settings.Ducken, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                        GameObject ducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
                         Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
                         this.holding = duckenGrabbable;
                         duckenGrabbable.Pickup(this);
@@ -329,7 +324,7 @@ public class HandBehavior : MonoBehaviour
                         break;
                     case (FoodBehavior.FoodType.Turkey, FoodBehavior.FoodType.Ducken):
                         Debug.Log("Form the Turducken!");
-                        GameObject turducken = Instantiate(settings.Ducken, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                        GameObject turducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
                         Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
                         this.holding = turduckenGrabbable;
                         turduckenGrabbable.Pickup(this);
@@ -348,7 +343,7 @@ public class HandBehavior : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.LogFormat("{0} Hand Entered a Trigger: {1}", hand, other.transform.name);
+        //Debug.LogFormat("{0} Hand Entered a Trigger: {1}", hand, other.transform.name);
         if (Animating) {
             if (other.gameObject == pickupTarget) {
                 switch (pickupTarget.tag) {
@@ -359,7 +354,7 @@ public class HandBehavior : MonoBehaviour
                         this.holding = grab;
                         grab.Pickup(this);
                         pickupTarget = null;
-                        Debug.LogFormat("{0} Hand Grabbed a new {1}", hand, this.holding.name);
+                        //Debug.LogFormat("{0} Hand Grabbed a new {1}", hand, this.holding.name);
                         break;
                 }
             }

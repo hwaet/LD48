@@ -26,6 +26,7 @@ public class PlateBehavior : MonoBehaviour
 
     private Transform lid;
     private Grabbable grabbable;
+    private SceneWrangler sceneWrangler;
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +34,12 @@ public class PlateBehavior : MonoBehaviour
         lid = transform.GetChild(0);
         grabbable = GetComponent<Grabbable>();
         grabbable.OnPickup += OnPickup;
+        this.sceneWrangler = FindObjectOfType<SceneWrangler>();
     }
 
     private void OnPickup(HandBehavior hand) {
-        PlateStackBehavior plateStack = PlateStackBehavior.FindObjectOfType<PlateStackBehavior>();
-        Instantiate(plateStack.platePrefab, this.transform.position, this.transform.rotation);
+        StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
+        Instantiate(settings.PlatePrefab, this.transform.position, this.transform.rotation);
     }
 
     // Update is called once per frame
@@ -78,7 +80,7 @@ public class PlateBehavior : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+  /*  private void OnTriggerEnter(Collider other) {
         if(other.tag == "delivery") {
             
             DeliveryBehavior delivery = other.transform.GetComponent<DeliveryBehavior>();
@@ -87,6 +89,6 @@ public class PlateBehavior : MonoBehaviour
             //Destroy(this.gameObject);
         }
 
-    }
+    }*/
 
 }

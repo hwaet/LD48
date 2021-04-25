@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83ae34fed1d9d3b43934e7b60537b831, type: 3}
-  m_Name: SpiceyChicken_Recipe
+  m_Script: {fileID: 11500000, guid: 7bd6315041f277a4d9e83280f4989a4c, type: 3}
+  m_Name: breadedTurducken
   m_EditorClassIdentifier: 
-  recipeName: 
-  icon: {fileID: 2800000, guid: 1d7da19b59562f541bd296d13c96f6be, type: 3}
-  FoodItems:
-  - {fileID: 11400000, guid: a649a9a1b3ee5064e94fa9cd0f74a1df, type: 2}
+  foodType: 5
+  BreadingLayers: 0000000001000000
+  stuffings: {fileID: 11400000, guid: 189549ceccaa4224593c2300ca12c524, type: 2}

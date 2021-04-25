@@ -8,14 +8,14 @@ public class StageSettings_ld48 : StageSettings
 {
     public string stageName = "name";
 
-    public List<Recipe> recipesOrders;
+    public List<Order> recipesOrders;
 
-    public GameObject Chicken;
-    public GameObject Duck;
-    public GameObject Turkey;
-    public GameObject Ducken;
-    public GameObject Turducken;
-
+    public GameObject ChickenPrefab;
+    public GameObject DuckPrefab;
+    public GameObject TurkeyPrefab;
+    public GameObject DuckenPrefab;
+    public GameObject TurduckenPrefab;
+    public GameObject PlatePrefab;
 
 
     //[Header("SceneContainers")]

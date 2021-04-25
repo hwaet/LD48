@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlateStackBehavior : MonoBehaviour
+public class BreadingBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public GameObject platePrefab;
 
+    public FoodBehavior.BreadingType breading;
+
+    // Start is called before the first frame update
     void Start()
     {
         
