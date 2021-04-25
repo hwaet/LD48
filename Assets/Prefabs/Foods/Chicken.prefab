@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodType: 0
-  cookTime: 2
+  cookTime: 4
   doneness: 0
   stuffableWith: 
   cooking: 0
