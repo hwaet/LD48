@@ -34,15 +34,11 @@ public class FoodBehavior : MonoBehaviour
 
     float cookingValue;
     List<Material> materials;
-
-    public FoodType stuffableWith;
     
     [HideInInspector()]
     public bool cooking = false;
     [HideInInspector()]
     public List<BreadingType> BreadingLayers; 
-    [HideInInspector()]
-    public List<FoodBehavior> Stuffings = new List<FoodBehavior>();
 
     private new Rigidbody rigidbody;
     private new Collider collider;
@@ -64,38 +60,6 @@ public class FoodBehavior : MonoBehaviour
         
     }
 
-    public void Hold(GameObject hand) {
-        StartCoroutine(HoldCoroutine(hand));
-    }
-
-    private IEnumerator HoldCoroutine(GameObject hand) {
-        while(this.rigidbody == null) {
-            yield return new WaitForEndOfFrame();
-        }
-        Collider handCollider = hand.GetComponent<Collider>();
-        Physics.IgnoreCollision(this.collider, handCollider, true);
-/*
-        this.collider.enabled = false;
-        this.rigidbody.useGravity = false;
-        this.rigidbody.isKinematic = true;
-*/
-        yield break;
-    }
-
-    public void Release(GameObject hand) {
-        /*      this.rigidbody.useGravity = true;
-              this.rigidbody.isKinematic = false;
-              this.collider.enabled = true;*/
-        StartCoroutine(ReleaseCoroutine(hand));
-    }
-
-    private IEnumerator ReleaseCoroutine(GameObject hand) {
-        yield return new WaitForSeconds(.2f);
-        Collider handCollider = hand.GetComponent<Collider>();
-        Physics.IgnoreCollision(this.collider, handCollider, false);
-        yield break;
-    }
-
     public void StartCook() {
         Debug.Log("Start Cooking");
         StartCoroutine(Cooking());
@@ -104,10 +68,6 @@ public class FoodBehavior : MonoBehaviour
     public void StopCook() {
         Debug.Log("Stop Cooking");
         cooking = false;
-    }
-
-    public void Stuff(FoodBehavior other) {
-        Stuffings.Add(other);
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -124,18 +84,12 @@ public class FoodBehavior : MonoBehaviour
                 break;
             case "breading":
                 BreadingBehavior bb = other.GetComponent<BreadingBehavior>();
-
-                //TODO - De-dupe breading (don't add duplicate bread layers)
-                this.BreadingLayers.Add(bb.breading);
-                Debug.LogFormat("Adding {0} to Breading Layers", other.tag);
+                if(BreadingLayers[BreadingLayers.Count-1] != bb.breading) {
+                    this.BreadingLayers.Add(bb.breading);
+                    Debug.LogFormat("Adding {0} to Breading Layers", other.tag);
+                }
+                
                 break;
-           /* case "delivery":
-                DeliveryBehavior delivery = other.transform.GetComponent<DeliveryBehavior>();
-                delivery.checkOrder(this);
-                //Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
-                //Destroy(this.gameObject);
-                break;*/
-
         }
     }
 
