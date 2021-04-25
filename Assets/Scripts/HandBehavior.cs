@@ -248,15 +248,6 @@ public class HandBehavior : MonoBehaviour
                         pickupTarget = null;
                         Debug.LogFormat("Hand {0} Grabbed the {1}", hand, holding.name);
                         break;
-
-                    /*case "cooler":
-                        CoolerBehavior cb = pickupTarget.GetComponent<CoolerBehavior>();
-                        GameObject newFood = Instantiate(cb.foodPrefab, this.transform.position, Quaternion.identity, this.transform) as GameObject;
-                        this.holding = newFood;
-                        newFood.GetComponent<FoodBehavior>().Hold();
-                        pickupTarget = null;
-                        Debug.LogFormat("Grabbed a new {0}", this.holding.name);
-                        break;*/
                 }
             }
 
@@ -277,8 +268,8 @@ public class HandBehavior : MonoBehaviour
                         CoolerBehavior cb = pickupTarget.GetComponent<CoolerBehavior>();
                         GameObject newFood = Instantiate(cb.foodPrefab, this.transform.position, Quaternion.identity) as GameObject;
                         Grabbable grab = newFood.GetComponent<Grabbable>();
-                        grab.Pickup(this);
                         this.holding = grab;
+                        grab.Pickup(this);
                         pickupTarget = null;
                         Debug.LogFormat("{0} Hand Grabbed a new {1}", hand, this.holding.name);
                         break;

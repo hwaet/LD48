@@ -13,6 +13,7 @@ public class FoodBehavior : MonoBehaviour
     }
 
     public enum FoodType {
+        None,
         Chicken,
         Duck,
         Turkey,
@@ -27,7 +28,7 @@ public class FoodBehavior : MonoBehaviour
     float cookingValue;
     List<Material> materials;
 
-    public FoodType[] stuffableWith;
+    public FoodType stuffableWith;
     
     [HideInInspector()]
     public bool cooking = false;
@@ -38,6 +39,7 @@ public class FoodBehavior : MonoBehaviour
 
     private new Rigidbody rigidbody;
     private new Collider collider;
+    private Grabbable grabbable;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,7 @@ public class FoodBehavior : MonoBehaviour
         this.rigidbody = GetComponent<Rigidbody>();
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
+        this.grabbable = GetComponent<Grabbable>();
     }
 
     // Update is called once per frame
@@ -100,9 +103,29 @@ public class FoodBehavior : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if(collision.transform.tag == "plate") {
-            this.rigidbody.isKinematic = true;
-            this.transform.parent = collision.transform;
+        if (grabbable.Held) {
+            if (this.stuffableWith != FoodType.None) {
+                if (collision.transform.tag == "food") {
+                    FoodBehavior otherFood = collider.transform.GetComponent<FoodBehavior>();
+                    switch(foodType, otherFood.foodType) {
+                        case (FoodType.Duck, FoodType.Chicken):
+
+
+
+                            //form a ducken
+                            break;
+                        case (FoodType.Turkey, FoodType.Ducken):
+                            //form the turducken
+                            break;
+                    }
+                }
+            }
+        }
+        else {
+            if (collision.transform.tag == "plate") {
+                this.rigidbody.isKinematic = true;
+                this.transform.parent = collision.transform;
+            }
         }
 
     }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8839951304402439408}
   - component: {fileID: 2486403644272635504}
   - component: {fileID: 8477331832969119019}
+  - component: {fileID: 682480475462835357}
   m_Layer: 8
   m_Name: Ducken
   m_TagString: food
@@ -128,10 +129,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 0
+  foodType: 3
   cookTime: 8
   doneness: 0
   stuffableWith: 
   cooking: 0
   BreadingLayers: []
   Stuffings: []
+--- !u!65 &682480475462835357
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137498140509798320}
+  m_Material: {fileID: 13400000, guid: ee0053e61d658b647b83f31f3ea0ae42, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5389306, y: 0.34, z: 0.8}
+  m_Center: {x: 0, y: 0.19, z: 0.06}

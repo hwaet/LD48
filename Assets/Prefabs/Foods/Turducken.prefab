@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3760565569433175380}
   - component: {fileID: 5957396040060174138}
   - component: {fileID: 4011839245284528781}
+  - component: {fileID: 4491764746991142391}
   m_Layer: 8
   m_Name: Turducken
   m_TagString: food
@@ -129,10 +130,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 0
+  foodType: 4
   cookTime: 10
   doneness: 0
   stuffableWith: 
   cooking: 0
   BreadingLayers: []
   Stuffings: []
+--- !u!135 &4491764746991142391
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327214104362133948}
+  m_Material: {fileID: 13400000, guid: ee0053e61d658b647b83f31f3ea0ae42, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.45
+  m_Center: {x: 0, y: -0.0000004917383, z: 0.03}

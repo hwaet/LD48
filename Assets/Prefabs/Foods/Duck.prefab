@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6950969580176339553}
   - component: {fileID: 6183976608565359500}
   - component: {fileID: 5371722128461833242}
+  - component: {fileID: 2126105380826163482}
   m_Layer: 8
   m_Name: Duck
   m_TagString: food
@@ -127,10 +128,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 0
+  foodType: 1
   cookTime: 4
   doneness: 0
-  stuffableWith: 
+  stuffableWith: 00000000
   cooking: 0
   BreadingLayers: []
   Stuffings: []
+--- !u!65 &2126105380826163482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754274221369468169}
+  m_Material: {fileID: 13400000, guid: ee0053e61d658b647b83f31f3ea0ae42, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.38, y: 0.23, z: 0.82}
+  m_Center: {x: 0, y: 0.15075976, z: 0.12}
