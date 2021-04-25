@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3142825244170172954, guid: 927ec69ee2487d746a15d09a3f030dee, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   - {fileID: -1427587773931869681, guid: 927ec69ee2487d746a15d09a3f030dee, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -127,9 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoodType: Duck
+  foodType: 0
   cookTime: 4
   doneness: 0
+  stuffableWith: 
   cooking: 0
   BreadingLayers: []
   Stuffings: []

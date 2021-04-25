@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(Grabbable))]
@@ -23,6 +24,8 @@ public class FoodBehavior : MonoBehaviour
     public float cookTime;
     public Doneness doneness;
 
+    float cookingValue;
+    List<Material> materials;
 
     public FoodType[] stuffableWith;
     
@@ -41,7 +44,7 @@ public class FoodBehavior : MonoBehaviour
     {
         this.rigidbody = GetComponent<Rigidbody>();
         this.collider = GetComponent<Collider>();
-        
+        this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
     }
 
     // Update is called once per frame
@@ -135,6 +138,8 @@ public class FoodBehavior : MonoBehaviour
         float startTime = Time.time;
         cooking = true;
         while(cooking) {
+            cookingValue = (Time.time - startTime) / cookTime;
+            UpdateMaterial();
             switch (doneness) {
                 case Doneness.Raw:
                     if(Time.time - startTime > cookTime) {
@@ -150,6 +155,14 @@ public class FoodBehavior : MonoBehaviour
                     break;
             }
             yield return new WaitForEndOfFrame();
+        }
+    }
+
+    void UpdateMaterial()
+    {
+        foreach (Material material in materials)
+        {
+            material.SetFloat("cookedState", cookingValue);
         }
     }
 

@@ -62,9 +62,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3142825244170172954, guid: 9df4c8d8c45d28f4d801c1ae37580ecf, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   - {fileID: -1427587773931869681, guid: 9df4c8d8c45d28f4d801c1ae37580ecf, type: 3}
-  - {fileID: -5507803885981263943, guid: 9df4c8d8c45d28f4d801c1ae37580ecf, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoodType: Ducken
+  foodType: 0
   cookTime: 8
   doneness: 0
+  stuffableWith: 
   cooking: 0
   BreadingLayers: []
   Stuffings: []

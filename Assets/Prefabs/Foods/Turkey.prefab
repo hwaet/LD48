@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3092847324252717431, guid: a2b5bb6a383f8fa4a8d54414e9c6abd9, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   - {fileID: 4310586713465477566, guid: a2b5bb6a383f8fa4a8d54414e9c6abd9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -141,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3092847324252717431, guid: a2b5bb6a383f8fa4a8d54414e9c6abd9, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   - {fileID: 4310586713465477566, guid: a2b5bb6a383f8fa4a8d54414e9c6abd9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -228,7 +228,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3092847324252717431, guid: a2b5bb6a383f8fa4a8d54414e9c6abd9, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -292,9 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoodType: Turkey
+  foodType: 0
   cookTime: 6
   doneness: 0
+  stuffableWith: 
   cooking: 0
   BreadingLayers: []
   Stuffings: []

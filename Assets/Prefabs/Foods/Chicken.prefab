@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1554929112170920336}
   - component: {fileID: 9202133889790636953}
   m_Layer: 8
-  m_Name: chickenLeg
+  m_Name: Chicken
   m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3092847324252717431, guid: f52c7df77bbf8544081e639f25900d6e, type: 3}
+  - {fileID: 2100000, guid: 944cab320702e7041a9b59f72f2b1e78, type: 2}
   - {fileID: 4310586713465477566, guid: f52c7df77bbf8544081e639f25900d6e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -128,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoodType: Chicken
+  foodType: 0
   cookTime: 2
   doneness: 0
+  stuffableWith: 
   cooking: 0
   BreadingLayers: []
   Stuffings: []
