@@ -14,9 +14,9 @@
 
 :models
 
-[name:;collection:nature;type:rock_smallI;position:(-0.2311, 0.3000, 0.3905);rotation:(0.0000, 0.0000, 0.0000);scale:(1.8307, 0.8000, 0.9715);group:;locked:False;hidden:False;materials:dirtDark+dirtDark;]
-[name:;collection:food;type:turkey;position:(-0.1373, -0.2308, 0.3825);rotation:(0.0000, 0.0000, 0.0000);scale:(1.6800, 1.9824, 1.3608);group:;locked:False;hidden:False;materials:dirtDark+brownLight;]
-[name:;collection:nature;type:rock_smallI;position:(-0.2511, -0.0800, 0.3905);rotation:(0.0000, 180.0000, 180.0000);scale:(1.8307, 0.8000, 0.9715);group:;locked:False;hidden:False;materials:dirtDark+dirtDark;]
-[name:;collection:food;type:turkey;position:(0.0807, 0.1068, 0.5927);rotation:(270.0000, 0.0000, 0.0000);scale:(1.1700, 0.9856, 0.5734);group:Group_0;locked:False;hidden:False;materials:brownDark+brownLight;]
-[name:;collection:food;type:wholerHam;position:(0.3088, 0.1185, 0.5295);rotation:(0.0000, 90.0000, 270.0000);scale:(0.5057, 0.4928, 0.7000);group:Group_0;locked:False;hidden:False;materials:orange+brownLight;]
-[name:;collection:nature;type:crops_dirtSingle;position:(-0.0092, 0.1141, 0.2727);rotation:(270.0000, 0.0000, 0.0000);scale:(0.8460, 1.0000, 0.4966);group:Group_0;locked:False;hidden:False;materials:brownDark+brownDark;]
+[name:;collection:food;type:turkey;position:(0.0000, -0.3408, -0.0119);rotation:(0.0000, 90.0000, 0.0000);scale:(1.6800, 1.9824, 1.3608);group:Group_1;locked:False;hidden:False;materials:dirtDark+brownLight;]
+[name:;collection:food;type:wholerHam;position:(0.1470, 0.0085, -0.4580);rotation:(0.0000, 180.0000, 270.0000);scale:(0.5057, 0.4928, 0.7000);group:Group_1;locked:False;hidden:False;materials:orange+brownLight;]
+[name:;collection:food;type:turkey;position:(0.2102, -0.0032, -0.2299);rotation:(270.0000, 90.0000, 0.0000);scale:(1.1700, 0.9856, 0.5734);group:Group_1;locked:False;hidden:False;materials:brownDark+brownLight;]
+[name:;collection:nature;type:crops_dirtSingle;position:(-0.1098, 0.0041, -0.1400);rotation:(270.0000, 90.0000, 0.0000);scale:(0.8460, 1.0000, 0.4966);group:Group_1;locked:False;hidden:False;materials:brownDark+brownDark;]
+[name:;collection:nature;type:rock_smallI;position:(0.0080, 0.1900, 0.0819);rotation:(0.0000, 90.0000, 0.0000);scale:(1.8307, 0.8000, 0.9715);group:Group_1;locked:False;hidden:False;materials:dirtDark+dirtDark;]
+[name:;collection:nature;type:rock_smallI;position:(0.0080, -0.1900, 0.1019);rotation:(0.0000, 270.0000, 180.0000);scale:(1.8307, 0.8000, 0.9715);group:Group_1;locked:False;hidden:False;materials:dirtDark+dirtDark;]

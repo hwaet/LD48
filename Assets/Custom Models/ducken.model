@@ -13,6 +13,6 @@
 
 :models
 
-[name:;collection:food;type:turkey;position:(0.0807, 0.0000, 0.3994);rotation:(0.0000, 0.0000, 0.0000);scale:(1.1700, 0.9856, 0.7937);group:;locked:False;hidden:False;materials:brownDark+brownLight;]
-[name:;collection:food;type:wholerHam;position:(0.3088, 0.0632, 0.4156);rotation:(0.0000, 90.0000, 0.0000);scale:(0.7000, 0.4928, 0.7000);group:;locked:False;hidden:False;materials:orange+brownLight;]
-[name:;collection:nature;type:crops_dirtSingle;position:(-0.0092, 0.3200, 0.4096);rotation:(0.0000, 0.0000, 0.0000);scale:(0.8460, 1.0000, 0.6874);group:;locked:False;hidden:False;materials:brownDark+brownDark;]
+[name:;collection:food;type:turkey;position:(0.0000, -0.2100, -0.0083);rotation:(0.0000, 90.0000, 0.0000);scale:(1.1700, 0.9856, 0.7937);group:Group_0;locked:False;hidden:False;materials:brownDark+brownLight;]
+[name:;collection:nature;type:crops_dirtSingle;position:(0.0102, 0.1100, 0.0816);rotation:(0.0000, 90.0000, 0.0000);scale:(0.8460, 1.0000, 0.6874);group:Group_0;locked:False;hidden:False;materials:brownDark+brownDark;]
+[name:;collection:food;type:wholerHam;position:(0.0162, -0.1468, -0.2364);rotation:(0.0000, 180.0000, 0.0000);scale:(0.7000, 0.4928, 0.7000);group:Group_0;locked:False;hidden:False;materials:orange+brownLight;]

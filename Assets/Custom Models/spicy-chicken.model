@@ -7,4 +7,4 @@
 
 :models
 
-[name:;collection:food;type:wholerHam;position:(0.0000, 0.0000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:brownDark+brownLight;]
+[name:;collection:food;type:wholerHam;position:(0.0000, 0.0000, 0.0000);rotation:(0.0000, 180.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:brownDark+brownLight;]
