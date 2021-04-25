@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 1
+  foodType: 2
   cookTime: 4
   doneness: 0
-  stuffableWith: 00000000
+  stuffableWith: 1
   cooking: 0
   BreadingLayers: []
   Stuffings: []

@@ -15,6 +15,7 @@ public class Grabbable : MonoBehaviour {
     public event DropEventHandler OnDrop;
 
     private bool held;
+    public HandBehavior holder;
 
     public bool Held {
         get { return held; }
@@ -27,6 +28,7 @@ public class Grabbable : MonoBehaviour {
     }
 
     public void Pickup(HandBehavior hand) {
+        this.holder = hand;
         StartCoroutine(PickupCoroutine(hand));
     }
 
@@ -51,6 +53,7 @@ public class Grabbable : MonoBehaviour {
         OnDrop?.Invoke(hand);
         this.held = false;
         this.transform.parent = null;
+        this.holder = null;
         this.rigidbody.isKinematic = false;
         this.rigidbody.useGravity = true;
         yield return new WaitForSeconds(.3f);

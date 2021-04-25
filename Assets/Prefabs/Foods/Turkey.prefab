@@ -293,10 +293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d05c56ba0fed434b8c6874bc0f9139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 2
+  foodType: 3
   cookTime: 6
   doneness: 0
-  stuffableWith: 03000000
+  stuffableWith: 4
   cooking: 0
   BreadingLayers: []
   Stuffings: []

@@ -65,6 +65,7 @@ public class HandBehavior : MonoBehaviour
     public LayerMask coolerZoneMask;
     public LayerMask foodZoneMask;
     public LayerMask plateZoneMask;
+    private SceneWrangler sceneWrangler;
 
 
     // Start is called before the first frame update
@@ -72,6 +73,7 @@ public class HandBehavior : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
+        this.sceneWrangler = FindObjectOfType<SceneWrangler>();
     }
 
     // Update is called once per frame
@@ -87,6 +89,7 @@ public class HandBehavior : MonoBehaviour
                 vel.x = Input.GetAxis("RightHandHorizontal");
                 vel.z = Input.GetAxis("RightHandVertical");
             }
+            vel.y = 0;
             vel = vel.normalized;
             vel *= holding == null ? moveSpeed : dragSpeed;
             rigidbody.velocity = vel;
@@ -251,11 +254,53 @@ public class HandBehavior : MonoBehaviour
                 }
             }
 
-            if(collision.gameObject.name == "PrepSurface") {
+            if (collision.gameObject.name == "PrepSurface") {
                 Debug.LogFormat("{0} Hand Hit the table, Aborting pick up", hand);
                 this.pickupState = PickupState.Returning;
             }
             //if we hit the prep surface abort pickup
+        }
+        else if (collision.gameObject.tag == "hand" && this.HoldingSomething && this.holding.tag == "food") {
+            Debug.LogFormat("Hand {0} hit the other hand", hand);
+            HandBehavior otherHand = collision.gameObject.GetComponent<HandBehavior>();
+
+            if (otherHand.HoldingSomething && otherHand.holding.tag == "food") {
+                FoodBehavior thisFood = holding.GetComponent<FoodBehavior>();
+                FoodBehavior otherFood = otherHand.holding.GetComponent<FoodBehavior>();
+                Debug.LogFormat("We both have food! I Have {0} They have {1}", thisFood.foodType, otherFood.foodType);
+                StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
+                switch (thisFood.foodType, otherFood.foodType) {
+                    
+                    case (FoodBehavior.FoodType.Duck, FoodBehavior.FoodType.Chicken):
+                        //form a ducken
+                        Debug.Log("Form the Ducken!");
+                        GameObject ducken = Instantiate(settings.Ducken, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                        Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
+                        this.holding = duckenGrabbable;
+                        duckenGrabbable.Pickup(this);
+                        otherHand.holding = null;
+                        Destroy(thisFood.gameObject);
+                        Destroy(otherFood.gameObject);
+                        
+
+                        break;
+                    case (FoodBehavior.FoodType.Turkey, FoodBehavior.FoodType.Ducken):
+                        Debug.Log("Form the Turducken!");
+                        GameObject turducken = Instantiate(settings.Ducken, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                        Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
+                        this.holding = turduckenGrabbable;
+                        turduckenGrabbable.Pickup(this);
+                        otherHand.holding = null;
+                        Destroy(thisFood.gameObject);
+                        Destroy(otherFood.gameObject);
+
+                        //form the turducken
+                        break;
+
+                }
+
+
+            }
         }
     }
 
@@ -342,5 +387,11 @@ public class HandBehavior : MonoBehaviour
         if(other.tag == "zone") {
             zone = Zone.Other;
         }
+    }
+
+    public void SwapHeldItem(GameObject gob) {
+        Grabbable grabbable = gob.GetComponent<Grabbable>();
+        this.holding = grabbable;
+        grabbable.Pickup(this);
     }
 }

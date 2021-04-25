@@ -40,6 +40,7 @@ public class FoodBehavior : MonoBehaviour
     private new Rigidbody rigidbody;
     private new Collider collider;
     private Grabbable grabbable;
+    private SceneWrangler sceneWrangler;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,7 @@ public class FoodBehavior : MonoBehaviour
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
         this.grabbable = GetComponent<Grabbable>();
+        this.sceneWrangler = FindObjectOfType<SceneWrangler>();
     }
 
     // Update is called once per frame
@@ -103,31 +105,10 @@ public class FoodBehavior : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (grabbable.Held) {
-            if (this.stuffableWith != FoodType.None) {
-                if (collision.transform.tag == "food") {
-                    FoodBehavior otherFood = collider.transform.GetComponent<FoodBehavior>();
-                    switch(foodType, otherFood.foodType) {
-                        case (FoodType.Duck, FoodType.Chicken):
-
-
-
-                            //form a ducken
-                            break;
-                        case (FoodType.Turkey, FoodType.Ducken):
-                            //form the turducken
-                            break;
-                    }
-                }
-            }
+        if (collision.transform.tag == "plate") {
+            this.rigidbody.isKinematic = true;
+            this.transform.parent = collision.transform;
         }
-        else {
-            if (collision.transform.tag == "plate") {
-                this.rigidbody.isKinematic = true;
-                this.transform.parent = collision.transform;
-            }
-        }
-
     }
 
     private void OnTriggerEnter(Collider other) {
