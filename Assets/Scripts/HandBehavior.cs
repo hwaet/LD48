@@ -187,6 +187,11 @@ public class HandBehavior : MonoBehaviour
     }
 
     IEnumerator PickupAnimation(GameObject target) {
+        Grabbable targetGrabbable = target.GetComponent<Grabbable>();
+        if (targetGrabbable != null && targetGrabbable.Held) {
+            yield break;
+        }
+
         pickupState = PickupState.Seeking;
         pickupTarget = target;
         Vector3 currPos = transform.position;
@@ -219,6 +224,11 @@ public class HandBehavior : MonoBehaviour
 
 
     IEnumerator PickupAndRotate(GameObject target) {
+        Grabbable targetGrabbable = target.GetComponent<Grabbable>();
+        if (targetGrabbable != null && targetGrabbable.Held) {
+            yield break;
+        }
+
         pickupState = PickupState.Seeking;
         pickupTarget = target;
         Vector3 currPos = transform.position;
