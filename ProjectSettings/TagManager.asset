@@ -15,6 +15,7 @@ TagManager:
   - cooler
   - fryBasket
   - zone
+  - hand
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Basket
   - Cooler
   - Food
-  - Table
+  - Scenery
   - Hand
   - Plate
   - 

@@ -40,7 +40,6 @@ public class FoodBehavior : MonoBehaviour
     private new Rigidbody rigidbody;
     private new Collider collider;
     private Grabbable grabbable;
-    private SceneWrangler sceneWrangler;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +48,6 @@ public class FoodBehavior : MonoBehaviour
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
         this.grabbable = GetComponent<Grabbable>();
-        this.sceneWrangler = FindObjectOfType<SceneWrangler>();
     }
 
     // Update is called once per frame

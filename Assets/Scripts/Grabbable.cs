@@ -17,6 +17,8 @@ public class Grabbable : MonoBehaviour {
     private bool held;
     public HandBehavior holder;
 
+    private int layerBak;
+
     public bool Held {
         get { return held; }
     }
@@ -25,6 +27,7 @@ public class Grabbable : MonoBehaviour {
     void Start() {
         this.rigidbody = GetComponent<Rigidbody>();
         this.collider = GetComponent<Collider>();
+        layerBak = this.gameObject.layer;
     }
 
     public void Pickup(HandBehavior hand) {
@@ -37,6 +40,7 @@ public class Grabbable : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         Physics.IgnoreCollision(this.collider, hand.collider, true);
+        this.gameObject.layer = hand.gameObject.layer;
         this.collider.enabled = true;
         this.rigidbody.isKinematic = true;
         this.rigidbody.useGravity = false;
@@ -54,6 +58,7 @@ public class Grabbable : MonoBehaviour {
         this.held = false;
         this.transform.parent = null;
         this.holder = null;
+        this.gameObject.layer = layerBak;
         this.rigidbody.isKinematic = false;
         this.rigidbody.useGravity = true;
         yield return new WaitForSeconds(.3f);

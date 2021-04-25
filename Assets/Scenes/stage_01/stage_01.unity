@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DuckCooler
       objectReference: {fileID: 0}
+    - target: {fileID: 8525858566921426648, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8831707167863718224, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -172,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9014587548955233378, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 9014587548955233378, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -274,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8b524ff6d57d5d641bef5b653c56640b, type: 3}
       propertyPath: m_Name
       value: Frier (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8b524ff6d57d5d641bef5b653c56640b, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b524ff6d57d5d641bef5b653c56640b, type: 3}
@@ -576,6 +584,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &825929063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 825929064}
+  m_Layer: 9
+  m_Name: Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &825929064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825929063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6396936, y: -17.531666, z: 19.378952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1004047734}
+  - {fileID: 1853876948}
+  - {fileID: 1709383598}
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832786421
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,9 +775,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1751480086967751553, guid: 676956b924839974fac5497c000c3ae9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 676956b924839974fac5497c000c3ae9, type: 3}
       propertyPath: m_Name
       value: styrofoam (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 676956b924839974fac5497c000c3ae9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 676956b924839974fac5497c000c3ae9, type: 3}
@@ -928,12 +977,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004047730}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.415, y: -1.3, z: 6.4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.7753062, y: 16.231667, z: -12.978952}
   m_LocalScale: {x: 4.46, y: 1, z: 8.7}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_Father: {fileID: 825929064}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1061667533
 GameObject:
@@ -1099,6 +1148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: left_hand
       objectReference: {fileID: 0}
+    - target: {fileID: 5784168450331192922, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: m_TagString
+      value: hand
+      objectReference: {fileID: 0}
     - target: {fileID: 6561373175990678752, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1163,7 +1216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1213665437}
   - component: {fileID: 1213665436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlateStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1198,7 +1251,7 @@ Transform:
   - {fileID: 862743959}
   - {fileID: 1587929117}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1255396248
 PrefabInstance:
@@ -1328,6 +1381,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7bd8d1c10d48e69419ec5b0e2f8eca1a, type: 3}
       propertyPath: m_Name
       value: breadcrumbs
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7bd8d1c10d48e69419ec5b0e2f8eca1a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bd8d1c10d48e69419ec5b0e2f8eca1a, type: 3}
@@ -1487,9 +1544,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1751480086967751553, guid: 676956b924839974fac5497c000c3ae9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 676956b924839974fac5497c000c3ae9, type: 3}
       propertyPath: m_Name
       value: styrofoam (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 676956b924839974fac5497c000c3ae9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 676956b924839974fac5497c000c3ae9, type: 3}
@@ -1630,12 +1695,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709383594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.37, y: -1.3, z: 6.4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.0096936, y: 16.231667, z: -12.978952}
   m_LocalScale: {x: 4.46, y: 1, z: 8.7}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 825929064}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1731888644
 GameObject:
@@ -1671,7 +1736,7 @@ Transform:
   - {fileID: 1753248734}
   - {fileID: 1061667538}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753248733
 GameObject:
@@ -1774,7 +1839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8525858566921426648, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8525858566921426648, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_TagString
@@ -1806,7 +1871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9014587548955233378, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9014587548955233378, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1913,9 +1978,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1751480086967751553, guid: 676956b924839974fac5497c000c3ae9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 676956b924839974fac5497c000c3ae9, type: 3}
       propertyPath: m_Name
       value: styrofoam
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 676956b924839974fac5497c000c3ae9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 676956b924839974fac5497c000c3ae9, type: 3}
@@ -2012,12 +2085,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853876944}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.21, y: -1.3, z: 6.89}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8496936, y: 16.231667, z: -12.488953}
   m_LocalScale: {x: 4.5, y: 1, z: 3.65}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 825929064}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6468606961442765749
 PrefabInstance:
@@ -2104,6 +2177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: right_hand
       objectReference: {fileID: 0}
+    - target: {fileID: 5784168450331192922, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: m_TagString
+      value: hand
+      objectReference: {fileID: 0}
     - target: {fileID: 6561373175990678752, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2176,6 +2253,10 @@ PrefabInstance:
     - target: {fileID: 8525858566921426648, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_Name
       value: TurkeyCooler
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525858566921426648, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8831707167863718224, guid: c56288ecd713ae0439e99f5afb7d82c8, type: 3}
       propertyPath: m_LocalScale.x

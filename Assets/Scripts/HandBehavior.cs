@@ -42,9 +42,10 @@ public class HandBehavior : MonoBehaviour
     }
 
     private PickupState pickupState = PickupState.Idle;
-    public bool PickingUp {
+    private bool dumping = false;
+    public bool Animating {
         get {
-            return pickupState != PickupState.Idle;
+            return pickupState != PickupState.Idle && !dumping;
         }
     }
 
@@ -79,7 +80,7 @@ public class HandBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!PickingUp) {
+        if (!Animating) {
             Vector3 vel = rigidbody.velocity;
             if (hand == Hand.Left) {
                 vel.x = Input.GetAxis("LeftHandHorizontal");
@@ -113,15 +114,13 @@ public class HandBehavior : MonoBehaviour
     }
 
     void InteractPressed () {
-        if (PickingUp) {
+        if (Animating) {
             return;
         }
         if (HoldingSomething) {
             switch (holding.tag) {
                 case "food":
                 case "plate":
-                    //drop it, contextually?
-                    //maybe do the stuffing?
                     Debug.LogFormat("Hand Dropped {0}:", holding.name);
                     holding.Drop(this);
                     holding = null;
@@ -145,7 +144,7 @@ public class HandBehavior : MonoBehaviour
                 case Zone.Frier:
                     if(Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, frierZoneMask)) {
                         if (hit.transform.tag == "fryBasket") {
-                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                            StartCoroutine(PickupAndRotate(hit.transform.gameObject));
                         }
                     }
                     break;
@@ -192,9 +191,8 @@ public class HandBehavior : MonoBehaviour
         Vector3 currPos = transform.position;
         Vector3 vel = Vector3.zero;
 
-        Debug.LogFormat("{0} Hand is going in", hand);
+        //Debug.LogFormat("{0} Hand is going in", hand);
         while (pickupState == PickupState.Seeking) {
-           
             if((currPos - transform.position).magnitude > pickUpDistance || HoldingSomething) {
                 pickupState = PickupState.Returning;
                 break;
@@ -206,22 +204,66 @@ public class HandBehavior : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        Debug.LogFormat("{0} Hand is backing out", hand);
+        //Debug.LogFormat("{0} Hand is backing out", hand);
         while(transform.position.y < hoverHeight) {
-            vel = this.transform.up;
-            vel *= pickupSpeed;
-            rigidbody.velocity = vel;
+            rigidbody.velocity = Vector3.up * pickupSpeed;
             yield return new WaitForFixedUpdate();
         }
 
         rigidbody.velocity = Vector3.zero;
-        Debug.LogFormat("{0} Hand Done Picking Up", hand);
+        //Debug.LogFormat("{0} Hand Done Picking Up", hand);
+        pickupState = PickupState.Idle;
+        yield break;
+    }
+
+
+    IEnumerator PickupAndRotate(GameObject target) {
+        pickupState = PickupState.Seeking;
+        pickupTarget = target;
+        Vector3 currPos = transform.position;
+        Vector3 vel;
+
+        float translationDistance = (transform.position - target.transform.position).magnitude;
+        Quaternion targetRotation = target.transform.rotation;
+
+        //Debug.LogFormat("{0} Hand is going in", hand);
+        while (pickupState == PickupState.Seeking) {
+            if ((currPos - transform.position).magnitude > pickUpDistance || HoldingSomething) {
+                pickupState = PickupState.Returning;
+                break;
+            }
+            vel = target.transform.position - transform.position;
+            vel = vel.normalized;
+            vel *= pickupSpeed;
+            rigidbody.velocity = vel;
+            rigidbody.MoveRotation(Quaternion.Slerp(Quaternion.identity,
+                                                    targetRotation,
+                                                    1 - (transform.position - target.transform.position).magnitude / translationDistance));
+            yield return new WaitForFixedUpdate();
+        }
+
+        translationDistance = hoverHeight - transform.position.y;
+        rigidbody.rotation = targetRotation;
+
+        //Debug.LogFormat("{0} Hand is backing out", hand);
+        while (transform.position.y < hoverHeight) {
+            rigidbody.velocity = Vector3.up * pickupSpeed;
+            rigidbody.MoveRotation(Quaternion.Slerp(targetRotation,
+                                        Quaternion.identity,
+                                        1 - (hoverHeight - transform.position.y) / translationDistance));
+            yield return new WaitForFixedUpdate();
+        }
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.rotation = Quaternion.identity;
+        //Debug.LogFormat("{0} Hand Done Picking Up", hand);
         pickupState = PickupState.Idle;
         yield break;
     }
 
     IEnumerator DumpBasket() {
         Debug.LogFormat("{0} Hand is dumping the basket", hand);
+        dumping = true;
         float callTime = Time.fixedTime;
         while(Time.fixedTime - callTime < dumpRotationTime) {
             rigidbody.MoveRotation(Quaternion.Slerp(Quaternion.identity, dumpAngle, (Time.fixedTime - callTime) / dumpRotationTime));
@@ -233,12 +275,13 @@ public class HandBehavior : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         rigidbody.rotation = Quaternion.identity;
+        dumping = false;
         yield break;
     }
 
     private void OnCollisionEnter(Collision collision) {
         Debug.LogFormat("{0} Hand Hit: {1}", hand, collision.gameObject.name);
-        if (PickingUp) {
+        if (Animating) {
             if (collision.gameObject == pickupTarget) {
                 //if the target is food, basket, or plate
                 switch (pickupTarget.tag) {
@@ -306,7 +349,7 @@ public class HandBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         Debug.LogFormat("{0} Hand Entered a Trigger: {1}", hand, other.transform.name);
-        if (PickingUp) {
+        if (Animating) {
             if (other.gameObject == pickupTarget) {
                 switch (pickupTarget.tag) {
                     case "cooler":
