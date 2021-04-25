@@ -1,0 +1,23 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:greyLight;color:RGBA(0.843, 0.902, 0.953, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:green;color:RGBA(0.341, 0.737, 0.592, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:_defaultMat;color:RGBA(1.000, 1.000, 1.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:yellow;color:RGBA(0.961, 0.725, 0.259, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:pink;color:RGBA(1.000, 0.537, 0.561, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownLight;color:RGBA(0.976, 0.773, 0.549, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownDark;color:RGBA(0.566, 0.196, 0.033, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brown;color:RGBA(0.683, 0.414, 0.248, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:stone;color:RGBA(0.628, 0.312, 0.000, 1.000);scale:(1.0, 1.0);texture:Wood/logs.png;shader:Default;valueA:0.5;valueB:0;]
+[name:custom9;color:RGBA(0.641, 0.350, 0.350, 1.000);scale:(1.0, 1.0);texture:Wood/logs.png;shader:Default;valueA:0.5;valueB:0.15;]
+[name:red;color:RGBA(0.910, 0.333, 0.325, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:grass;color:RGBA(0.173, 0.847, 0.722, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:custom12;color:RGBA(0.910, 0.000, 0.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:custom13;color:RGBA(0.862, 0.786, 0.419, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0.15;]
+
+:models
+
+[name:;collection:food;type:plateRectangle;position:(0.0000, 0.0000, 0.0043);rotation:(0.0000, 0.0000, 0.0000);scale:(1.4000, 1.0000, 1.7000);group:;locked:False;hidden:False;materials:_defaultMat;]
+[name:;collection:food;type:eggCooked;position:(-0.0294, 0.1000, 0.0334);rotation:(0.0000, 330.0000, 0.0000);scale:(2.4531, 0.7000, 2.3233);group:;locked:False;hidden:False;materials:custom13+custom13;]
