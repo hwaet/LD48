@@ -9,7 +9,7 @@ public class Recipe : ScriptableObject
     public string recipeName;
     public Texture2D icon;
     public List<RecipeComponent> FoodItems;
-    public List<string> foodTypeList;
+    public List<FoodBehavior.FoodType> foodTypeList;
 
     private void OnValidate()
     {
@@ -27,10 +27,10 @@ public class Recipe : ScriptableObject
         if (deliveredFood.Count != FoodItems.Count) return false;
 
         //check names of foods
-        List<string> foodTypes = new List<string>();
+        List<FoodBehavior.FoodType> foodTypes = new List<FoodBehavior.FoodType>();
         foreach (FoodBehavior food in deliveredFood)
         {
-            foodTypes.Add(food.FoodType);
+            foodTypes.Add(food.foodType);
         }
         foodTypes.Sort();
         if (areListsEqual(foodTypeList,foodTypes) == false)
@@ -58,7 +58,7 @@ public class Recipe : ScriptableObject
         return true;
     }
 
-    bool areListsEqual(List<string> lista, List<string> listb)
+    bool areListsEqual(List<FoodBehavior.FoodType> lista, List<FoodBehavior.FoodType> listb)
     {
         if (lista.Count != listb.Count) return false;
 

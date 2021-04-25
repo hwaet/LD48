@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class RecipeComponent : ScriptableObject
 {
-    public string foodName;
+    public FoodBehavior.FoodType foodName;
     public List<string> breadings;
     public RecipeComponent stuffings;
 

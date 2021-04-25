@@ -11,12 +11,26 @@ public class FoodBehavior : MonoBehaviour
         Burnt
     }
 
-    public string FoodType;
+    public enum FoodType {
+        Chicken,
+        Duck,
+        Turkey,
+        Ducken,
+        Turducken
+    }
+
+    public FoodType foodType;
     public float cookTime;
     public Doneness doneness;
-    public bool cooking = false;
 
+
+    public FoodType[] stuffableWith;
+    
+    [HideInInspector()]
+    public bool cooking = false;
+    [HideInInspector()]
     public List<string> BreadingLayers = new List<string>();
+    [HideInInspector()]
     public List<FoodBehavior> Stuffings = new List<FoodBehavior>();
 
     private new Rigidbody rigidbody;
