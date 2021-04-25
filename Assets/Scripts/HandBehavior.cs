@@ -306,6 +306,9 @@ public class HandBehavior : MonoBehaviour
                         case "fryBasket":
                         case "plate":
                             Grabbable grab = pickupTarget.GetComponent<Grabbable>();
+                            if (grab.Held) {
+                                break;
+                            }
                             grab.Pickup(this);
                             holding = grab;
                             pickupTarget = null;
