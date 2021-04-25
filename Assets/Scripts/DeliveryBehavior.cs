@@ -6,7 +6,13 @@ using UnityEngine.Events;
 public class DeliveryBehavior : MonoBehaviour
 {
     SceneWrangler sceneWrangler;
-    public List<Order> orderList;
+    public bool enforceTime = false;
+    public Queue<Order> orderQueue;
+
+    public List<Order> activeOrderList = new List<Order>();
+    public List<float> orderAddTimes = new List<float>();
+    public float orderAddDelay;
+    private float lastAddTime;
 
     // Start is called before the first frame update
     void Start()
@@ -14,9 +20,34 @@ public class DeliveryBehavior : MonoBehaviour
         reloadOrderList();
     }
 
-    private void Update()
-    {
-        checkForVictory();
+    private void Update() {
+
+        if (enforceTime) {
+            List<int> toRemove = new List<int>();
+            for(int i = 0; i < activeOrderList.Count; i++) {
+                if(Time.time - orderAddTimes[i] > activeOrderList[i].patience) {
+                    toRemove.Add(i);
+                }
+            }
+            foreach(int i in toRemove) {
+                orderAddTimes.RemoveAt(i);
+                activeOrderList.RemoveAt(i);
+            }
+            
+            if (orderQueue.Count > 0) {
+                if (Time.time - lastAddTime > orderAddDelay || activeOrderList.Count == 0) {
+                    activeOrderList.Add(orderQueue.Dequeue());
+                    orderAddTimes.Add(Time.time);
+                }
+            }
+            else {
+                checkForVictory();
+            }
+        }
+        else {
+            checkForVictory();
+        }
+        
     }
 
     [ContextMenu("reload orders")]
@@ -24,10 +55,19 @@ public class DeliveryBehavior : MonoBehaviour
     {
         sceneWrangler = FindObjectOfType<SceneWrangler>();
         StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
-        orderList.Clear();
-        foreach (Order recipe in settings.recipesOrders)
-        {
-            orderList.Add(recipe);
+        orderQueue.Clear();
+        activeOrderList.Clear();
+        orderAddTimes.Clear();
+        if (enforceTime) {
+            foreach (Order order in settings.recipesOrders) {
+                orderQueue.Enqueue(order);
+            }
+            activeOrderList.Add(orderQueue.Dequeue());
+            orderAddTimes.Add(Time.time);
+            lastAddTime = Time.time;
+        }
+        else {
+            activeOrderList.AddRange(settings.recipesOrders);
         }
     }
 
@@ -45,13 +85,13 @@ public class DeliveryBehavior : MonoBehaviour
         Debug.LogFormat("Recieved this plate: {0}", string.Join(",", plate.contents));
 
         Debug.Log("Checking against Orders:");
-        foreach(Order order in orderList) {
+        foreach(Order order in activeOrderList) {
             Debug.Log(string.Join(",", order.FoodItems));
         }
 
         int orderHit = -1;
-        for(int i = 0; i < orderList.Count; i++) {
-            if (orderList[i].CheckDelivery(plate)) {
+        for(int i = 0; i < activeOrderList.Count; i++) {
+            if (activeOrderList[i].CheckDelivery(plate)) {
                 orderHit = i;
                 break;
             }
@@ -59,7 +99,10 @@ public class DeliveryBehavior : MonoBehaviour
 
         if(orderHit > -1) {
             Debug.Log("Successful Delivery!");
-            orderList.RemoveAt(orderHit);
+            activeOrderList.RemoveAt(orderHit);
+            if (enforceTime) {
+                orderAddTimes.RemoveAt(orderHit);
+            }
             Destroy(plate.gameObject);
         }
         else {
@@ -67,46 +110,12 @@ public class DeliveryBehavior : MonoBehaviour
             //could be fun to throw the plate back rather than just destroy it
             Destroy(plate.gameObject);
         }
-
-
-
     }
-
-/*    public void checkOrder(FoodBehavior deliveredFood)
-    {
-        List<FoodBehavior> tempFoodPlate = new List<FoodBehavior>();
-        tempFoodPlate.Add(deliveredFood);
-        compareAgainstOrder(tempFoodPlate);
-        Debug.Log("Delivered this food:" + deliveredFood.name);
-    }
-*/
-  /*  [ContextMenu("check order")]
-    public void compareAgainstOrder(List<FoodBehavior> deliveredFood)
-    {
-        foreach (Order order in orderList)
-        {
-            bool successfullDelivery = order.CheckDeliver(deliveredFood);
-
-            if (successfullDelivery == true)
-            {
-                Debug.Log("You have successfully filled an order:" + order.recipeName);
-                orderList.Remove(order);
-                
-                foreach (FoodBehavior food in deliveredFood)
-                {
-                    GameObject.Destroy(food.gameObject);
-                }
-                return;
-                
-            }
-        }
-        
-    }*/
 
     [ContextMenu("check for victory condition")]
     public void checkForVictory()
     {
-        if (orderList.Count == 0)
+        if (activeOrderList.Count == 0)
         {
             Debug.Log("You win this stage!!!!!");
             sceneWrangler.loadTargetContainer();

@@ -10,6 +10,8 @@ public class Order : ScriptableObject
     public string recipeName;
     public Texture2D icon;
     public List<Recipe> FoodItems;
+    public float patience;
+
 /*    public List<FoodBehavior.FoodType> foodTypeList;
 
     private void OnValidate()
