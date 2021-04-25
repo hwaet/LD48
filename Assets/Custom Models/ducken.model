@@ -1,0 +1,18 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:brownDark;color:RGBA(0.676, 0.546, 0.240, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownLight;color:RGBA(0.938, 0.851, 0.755, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:_defaultMat;color:RGBA(1.000, 1.000, 1.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:orange;color:RGBA(0.476, 0.219, 0.115, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:custom4;color:RGBA(0.000, 0.000, 0.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0.15;]
+[name:custom5;color:RGBA(0.000, 0.000, 0.000, 0.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0.15;]
+[name:dirt;color:RGBA(0.886, 0.514, 0.341, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:dirtDark;color:RGBA(0.710, 0.408, 0.271, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+
+:models
+
+[name:;collection:food;type:turkey;position:(0.0807, 0.0000, 0.3994);rotation:(0.0000, 0.0000, 0.0000);scale:(1.1700, 0.9856, 0.7937);group:;locked:False;hidden:False;materials:brownDark+brownLight;]
+[name:;collection:food;type:wholerHam;position:(0.3088, 0.0632, 0.4156);rotation:(0.0000, 90.0000, 0.0000);scale:(0.7000, 0.4928, 0.7000);group:;locked:False;hidden:False;materials:orange+brownLight;]
+[name:;collection:nature;type:crops_dirtSingle;position:(-0.0092, 0.3200, 0.4096);rotation:(0.0000, 0.0000, 0.0000);scale:(0.8460, 1.0000, 0.6874);group:;locked:False;hidden:False;materials:brownDark+brownDark;]
