@@ -142,47 +142,46 @@ public class HandBehavior : MonoBehaviour
         }
         else { 
             RaycastHit hit;
-            switch (zone) {
-                case Zone.Frier:
-                    if(Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, frierZoneMask)) {
-                        if (hit.transform.tag == "fryBasket") {
-                            StartCoroutine(PickupAndRotate(hit.transform.gameObject));
-                        }
-                    }
-                    break;
-
-                case Zone.Cooler:
-                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, coolerZoneMask)) {
-                        if (hit.transform.tag == "cooler") {
-                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                        }
-                    }
-                    break;
-
-
-                case Zone.Prep:
-                case Zone.Breading:
-                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, foodZoneMask)) {
-                        if (hit.transform.tag == "food") {
-                            StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                        }
-                    }
-                    break;
-
-                case Zone.Platting:
-                    if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, plateZoneMask)) {
-                        Debug.LogFormat("Raycast Hit {0}", hit.transform.name);
-                        if (hit.transform.tag == "plate") {
-                            PlateBehavior plate = hit.transform.GetComponent<PlateBehavior>();
-                            if (!plate.Open) {
+            if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, frierZoneMask)) {
+                if (hit.transform.tag == "fryBasket") {
+                    StartCoroutine(PickupAndRotate(hit.transform.gameObject));
+                }
+            }
+            if (pickupState != PickupState.Seeking) {
+                switch (zone) {
+                    case Zone.Cooler:
+                        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, coolerZoneMask)) {
+                            if (hit.transform.tag == "cooler") {
                                 StartCoroutine(PickupAnimation(hit.transform.gameObject));
                             }
-                            else if (plate.contents.Count >0) {
-                                plate.Close();
+                        }
+                        break;
+
+
+                    case Zone.Prep:
+                    case Zone.Breading:
+                        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, foodZoneMask)) {
+                            if (hit.transform.tag == "food") {
+                                StartCoroutine(PickupAnimation(hit.transform.gameObject));
                             }
                         }
-                    }
-                    break;
+                        break;
+
+                    case Zone.Platting:
+                        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, plateZoneMask)) {
+                            Debug.LogFormat("Raycast Hit {0}", hit.transform.name);
+                            if (hit.transform.tag == "plate") {
+                                PlateBehavior plate = hit.transform.GetComponent<PlateBehavior>();
+                                if (!plate.Open) {
+                                    StartCoroutine(PickupAnimation(hit.transform.gameObject));
+                                }
+                                else if (plate.contents.Count > 0) {
+                                    plate.Close();
+                                }
+                            }
+                        }
+                        break;
+                }
             }
         }
     }
@@ -319,28 +318,32 @@ public class HandBehavior : MonoBehaviour
                         switch (thisFood.foodType, otherFood.foodType) {
 
                             case (FoodBehavior.FoodType.Duck, FoodBehavior.FoodType.Chicken):
-                                //form a ducken
-                                Debug.Log("Form the Ducken!");
-                                GameObject ducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
-                                Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
-                                this.holding = duckenGrabbable;
-                                duckenGrabbable.Pickup(this);
-                                otherHand.holding = null;
-                                Destroy(thisFood.gameObject);
-                                Destroy(otherFood.gameObject);
-
+                                if(otherFood.doneness != FoodBehavior.Doneness.Raw) {
+                                    //form a ducken
+                                    Debug.Log("Form the Ducken!");
+                                    GameObject ducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                                    Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
+                                    this.holding = duckenGrabbable;
+                                    duckenGrabbable.Pickup(this);
+                                    otherHand.holding = null;
+                                    Destroy(thisFood.gameObject);
+                                    Destroy(otherFood.gameObject);
+                                }
                                 break;
                             case (FoodBehavior.FoodType.Turkey, FoodBehavior.FoodType.Ducken):
-                                Debug.Log("Form the Turducken!");
-                                GameObject turducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
-                                Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
-                                this.holding = turduckenGrabbable;
-                                turduckenGrabbable.Pickup(this);
-                                otherHand.holding = null;
-                                Destroy(thisFood.gameObject);
-                                Destroy(otherFood.gameObject);
+                                if (otherFood.doneness != FoodBehavior.Doneness.Raw) {
+                                    //form the turducken
+                                    Debug.Log("Form the Turducken!");
+                                    GameObject turducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                                    Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
+                                    this.holding = turduckenGrabbable;
+                                    turduckenGrabbable.Pickup(this);
+                                    otherHand.holding = null;
+                                    Destroy(thisFood.gameObject);
+                                    Destroy(otherFood.gameObject);
 
-                                //form the turducken
+                                 
+                                }
                                 break;
 
                         }
