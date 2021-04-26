@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3147579994683082419}
   - component: {fileID: 8373056095880357140}
   - component: {fileID: 7012408923191718729}
+  - component: {fileID: 20553930702714322}
   m_Layer: 9
   m_Name: TurkeyCooler
   m_TagString: Untagged
@@ -88,6 +89,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &20553930702714322
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120790086337798802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3145058497754134291, guid: 9c65902b484491c4899d3be4d29d9ffb, type: 3}
 --- !u!1 &5355281199439887675
 GameObject:
   m_ObjectHideFlags: 0
