@@ -102,34 +102,39 @@ public class FoodBehavior : MonoBehaviour
         }
     }
 
+    //Code copied from: https://www.arduino.cc/reference/en/language/functions/math/map/
+    float map(float x, float in_min, float in_max, float out_min, float out_max) {
+        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+
     IEnumerator Cooking() {
         float startTime = Time.time;
         cooking = true;
-        float impulse = 0;
+        float bouancy = map(this.transform.position.y, -.5f, -1.1f, 0, 1.3f);
         while(cooking) {
             cookingValue += Time.deltaTime;
             UpdateMaterial();
             switch (doneness) {
                 case Doneness.Raw:
-                    impulse = Random.Range(.0025f, .0075f);
+                    //impulse *= Random.Range(1, 1.1f);
                     if(cookingValue > cookTime) {
                         doneness = Doneness.Cooked;
                         Debug.Log("Cooked");
                     }
                     break;
                 case Doneness.Cooked:
-                    impulse = Random.Range(0, .005f);
+                    //impulse *= Random.Range(1, 1.05f);
                     if (cookingValue > cookTime * 2) {
                         doneness = Doneness.Burnt;
                         Debug.Log("Burnt");
                     }
                     break;
                 case Doneness.Burnt:
-                    impulse = 0;
+                    bouancy = 0;
                     break;
             }
 
-            rigidbody.AddForce(-Physics.gravity * impulse, ForceMode.Impulse);
+            rigidbody.AddForce(-Physics.gravity * bouancy, ForceMode.Acceleration);
 
             if (Time.time - startTime > cookTime * 5) {
                 Destroy(this.gameObject);
