@@ -114,7 +114,7 @@ public class PlateBehavior : MonoBehaviour
 
     private void DeliverMe() {
         GameObject deliveryZone = GameObject.FindGameObjectWithTag("delivery");
-        if (deliveryZone != null) {
+        if ((deliveryZone != null) && (contents.Count != 0)) {
             DeliveryBehavior deliveryBehavior = deliveryZone.GetComponent<DeliveryBehavior>();
             deliveryBehavior.evaluatePlate(this);
         }

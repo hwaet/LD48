@@ -88,7 +88,6 @@ public class DeliveryBehavior : MonoBehaviour
             lastAddTime = Time.time;
         }
         else {
-            print("test" + sceneWrangler.currentSceneContainer);
             activeOrderList.AddRange(settings.recipesOrders);
         }
 
