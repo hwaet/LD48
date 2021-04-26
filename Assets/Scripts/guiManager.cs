@@ -40,17 +40,19 @@ public class guiManager : MonoBehaviour
             goGui.RecipeIcon.sprite = order.icon;
             if (recipe.BreadingLayers.Count > 1)
             {
-                for (int i=0; i< recipe.BreadingLayers.Count; i++)
+                for (int i=1; i< recipe.BreadingLayers.Count; i++)
                 {
                     if (recipe.BreadingLayers[i] == FoodBehavior.BreadingType.Breading)
                     {
-                        goGuiImages[i].sprite = breading1;
+                        goGuiImages[i-1].sprite = breading1;
+                        goGuiImages[i - 1].color = Color.white;
                     }
 
-                    //if (recipe.BreadingLayers[i] == FoodBehavior.BreadingType.Spicy)
-                    //{
-                    //    goGuiImages[i].sprite = breading2;
-                    //}
+                    if (recipe.BreadingLayers[i] == FoodBehavior.BreadingType.Spicy)
+                    {
+                        goGuiImages[i-1].sprite = breading2;
+                        goGuiImages[i - 1].color = Color.white;
+                    }
                 }
             }
             orderListRect.ForceUpdateRectTransforms();

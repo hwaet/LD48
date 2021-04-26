@@ -141,6 +141,8 @@ public class DeliveryBehavior : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (success) {
             Destroy(plate.gameObject);
+            guiManager gui = FindObjectOfType<guiManager>();
+            gui.UpdateOrderList();
         }
         else {
             Rigidbody plateBody = plate.GetComponent<Rigidbody>();
