@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,22 +14,10 @@ public class DeliveryBehavior : MonoBehaviour
     public float orderAddDelay;
     private float lastAddTime;
 
-    bool armVictoryState = false;
-
     // Start is called before the first frame update
     void Start()
     {
-        //reloadOrderList();
-    }
-
-    private void OnEnable()
-    {
-        SceneWrangler.sceneLoadComplete += reloadOrderList;
-    }
-
-    private void OnDisable()
-    {
-        SceneWrangler.sceneLoadComplete -= reloadOrderList;
+        reloadOrderList();
     }
 
     private void Update() {
@@ -66,15 +53,7 @@ public class DeliveryBehavior : MonoBehaviour
     [ContextMenu("reload orders")]
     private void reloadOrderList()
     {
-        List<SceneWrangler> wranglers = FindObjectsOfType<SceneWrangler>().ToList();
-        foreach (SceneWrangler wrangler in wranglers)
-        {
-            if (wrangler.levelState == LevelLoadingProcess.Idle) sceneWrangler = wrangler;
-        }
-
-
-        print("reloading order list");
-        armVictoryState = true;
+        sceneWrangler = FindObjectOfType<SceneWrangler>();
         StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
         orderQueue.Clear();
         activeOrderList.Clear();
@@ -88,18 +67,17 @@ public class DeliveryBehavior : MonoBehaviour
             lastAddTime = Time.time;
         }
         else {
-            print("test" + sceneWrangler.currentSceneContainer);
             activeOrderList.AddRange(settings.recipesOrders);
         }
     }
 
 
-  /*  private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if(other.tag == "plate") {
             PlateBehavior plate = other.GetComponent<PlateBehavior>();
             evaluatePlate(plate);
         }
-    }*/
+    }
 
     // Update is called once per frame
     public void evaluatePlate(PlateBehavior plate) {
@@ -125,32 +103,19 @@ public class DeliveryBehavior : MonoBehaviour
             if (enforceTime) {
                 orderAddTimes.RemoveAt(orderHit);
             }
-            StartCoroutine(OrderResult(plate, true));
-            
+            Destroy(plate.gameObject);
         }
         else {
             Debug.Log("Incorrect Delivery!");
             //could be fun to throw the plate back rather than just destroy it
-            StartCoroutine(OrderResult(plate, false));
-        }
-    }
-
-    IEnumerator OrderResult(PlateBehavior plate, bool success) {
-        yield return new WaitForSeconds(1);
-        if (success) {
             Destroy(plate.gameObject);
         }
-        else {
-            Rigidbody plateBody = plate.GetComponent<Rigidbody>();
-            plateBody.AddForce((Vector3.up - Vector3.forward) * 10, ForceMode.Impulse);
-        }
-
     }
 
     [ContextMenu("check for victory condition")]
     public void checkForVictory()
     {
-        if ((activeOrderList.Count == 0) && (armVictoryState == true))
+        if (activeOrderList.Count == 0)
         {
             Debug.Log("You win this stage!!!!!");
             sceneWrangler.loadTargetContainer();

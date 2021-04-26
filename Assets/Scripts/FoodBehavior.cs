@@ -37,7 +37,7 @@ public class FoodBehavior : MonoBehaviour
     
     [HideInInspector()]
     public bool cooking = false;
-    //[HideInInspector()]
+    [HideInInspector()]
     public List<BreadingType> BreadingLayers; 
 
     private new Rigidbody rigidbody;
@@ -50,9 +50,6 @@ public class FoodBehavior : MonoBehaviour
         this.rigidbody = GetComponent<Rigidbody>();
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
-        foreach(Transform child in transform) {
-            this.materials.AddRange(child.GetComponent<MeshRenderer>().materials.ToList());
-        }
         this.grabbable = GetComponent<Grabbable>();
         this.BreadingLayers = new List<BreadingType> { BreadingType.Fresh };
     }
@@ -102,42 +99,25 @@ public class FoodBehavior : MonoBehaviour
         }
     }
 
-    //Code copied from: https://www.arduino.cc/reference/en/language/functions/math/map/
-    float map(float x, float in_min, float in_max, float out_min, float out_max) {
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    }
-
     IEnumerator Cooking() {
         float startTime = Time.time;
         cooking = true;
-        float bouancy = map(this.transform.position.y, -.5f, -1.1f, 0, 1.3f);
         while(cooking) {
             cookingValue += Time.deltaTime;
             UpdateMaterial();
             switch (doneness) {
                 case Doneness.Raw:
-                    //impulse *= Random.Range(1, 1.1f);
                     if(cookingValue > cookTime) {
                         doneness = Doneness.Cooked;
                         Debug.Log("Cooked");
                     }
                     break;
                 case Doneness.Cooked:
-                    //impulse *= Random.Range(1, 1.05f);
                     if (cookingValue > cookTime * 2) {
                         doneness = Doneness.Burnt;
                         Debug.Log("Burnt");
                     }
                     break;
-                case Doneness.Burnt:
-                    bouancy = 0;
-                    break;
-            }
-
-            rigidbody.AddForce(-Physics.gravity * bouancy, ForceMode.Acceleration);
-
-            if (Time.time - startTime > cookTime * 5) {
-                Destroy(this.gameObject);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -147,7 +127,7 @@ public class FoodBehavior : MonoBehaviour
     {
         foreach (Material material in materials)
         {
-            material.SetFloat("cookedState", cookingValue / (cookTime*2));
+            material.SetFloat("cookedState", cookingValue / cookTime);
         }
     }
 

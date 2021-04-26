@@ -142,7 +142,7 @@ public class HandBehavior : MonoBehaviour
         }
         else { 
             RaycastHit hit;
-            if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 10, frierZoneMask)) {
+            if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, frierZoneMask)) {
                 if (hit.transform.tag == "fryBasket") {
                     StartCoroutine(PickupAndRotate(hit.transform.gameObject));
                 }
@@ -150,7 +150,7 @@ public class HandBehavior : MonoBehaviour
             if (pickupState != PickupState.Seeking) {
                 switch (zone) {
                     case Zone.Cooler:
-                        if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 10, coolerZoneMask)) {
+                        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, coolerZoneMask)) {
                             if (hit.transform.tag == "cooler") {
                                 StartCoroutine(PickupAnimation(hit.transform.gameObject));
                             }
@@ -160,7 +160,7 @@ public class HandBehavior : MonoBehaviour
 
                     case Zone.Prep:
                     case Zone.Breading:
-                        if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 10, foodZoneMask)) {
+                        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, foodZoneMask)) {
                             if (hit.transform.tag == "food") {
                                 StartCoroutine(PickupAnimation(hit.transform.gameObject));
                             }
@@ -168,7 +168,7 @@ public class HandBehavior : MonoBehaviour
                         break;
 
                     case Zone.Platting:
-                        if (Physics.SphereCast(this.transform.position, 1,  -this.transform.up, out hit, 10, plateZoneMask)) {
+                        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, plateZoneMask)) {
                             Debug.LogFormat("Raycast Hit {0}", hit.transform.name);
                             if (hit.transform.tag == "plate") {
                                 PlateBehavior plate = hit.transform.GetComponent<PlateBehavior>();

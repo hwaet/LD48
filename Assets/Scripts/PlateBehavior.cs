@@ -26,7 +26,6 @@ public class PlateBehavior : MonoBehaviour
 
     private Transform lid;
     private Grabbable grabbable;
-    private bool inDelivery = false;
     private SceneWrangler sceneWrangler;
 
     // Start is called before the first frame update
@@ -35,7 +34,6 @@ public class PlateBehavior : MonoBehaviour
         lid = transform.GetChild(0);
         grabbable = GetComponent<Grabbable>();
         grabbable.OnPickup += OnPickup;
-        grabbable.OnDrop += OnDrop;
         this.sceneWrangler = FindObjectOfType<SceneWrangler>();
     }
 
@@ -43,8 +41,6 @@ public class PlateBehavior : MonoBehaviour
         StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
         Instantiate(settings.PlatePrefab, this.transform.position, this.transform.rotation);
     }
-
-    
 
     // Update is called once per frame
     void Update()
@@ -84,34 +80,15 @@ public class PlateBehavior : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag == "delivery") {
-            inDelivery = true;
-        }
-        if (!grabbable.Held) {
-            DeliverMe();
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
+  /*  private void OnTriggerEnter(Collider other) {
         if(other.tag == "delivery") {
-            inDelivery = false;
+            
+            DeliveryBehavior delivery = other.transform.GetComponent<DeliveryBehavior>();
+            delivery.checkOrder(this);
+            //Debug.LogFormat("Delivered: {0} {1} with: ", doneness, this.FoodType, this.BreadingLayers.ToString());
+            //Destroy(this.gameObject);
         }
-    }
 
-    private void OnDrop(HandBehavior hand) {
-        if (inDelivery) {
-            DeliverMe();
-        }
-    }
-
-    private void DeliverMe() {
-        GameObject deliveryZone = GameObject.FindGameObjectWithTag("delivery");
-        if (deliveryZone != null) {
-            DeliveryBehavior deliveryBehavior = deliveryZone.GetComponent<DeliveryBehavior>();
-            deliveryBehavior.evaluatePlate(this);
-        }
-    }
-
+    }*/
 
 }
