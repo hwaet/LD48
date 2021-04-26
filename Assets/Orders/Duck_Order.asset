@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Duck_Order
   m_EditorClassIdentifier: 
   recipeName: Fired Duck
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2b04ca9658e1d48478babe6a279ccb1a, type: 3}
   FoodItems:
   - {fileID: 11400000, guid: fbf0fef66727d234a8c64df313008b09, type: 2}
+  patience: 0

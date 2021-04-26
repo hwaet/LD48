@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: freshChicken
   m_EditorClassIdentifier: 
   foodType: 1
-  BreadingLayers: 00000000
-  stuffings: {fileID: 0}
+  BreadingLayers: 000000000100000003000000

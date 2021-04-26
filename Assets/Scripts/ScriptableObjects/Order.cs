@@ -8,7 +8,7 @@ using UnityEngine;
 public class Order : ScriptableObject
 {
     public string recipeName;
-    public Texture2D icon;
+    public Sprite icon;
     public List<Recipe> FoodItems;
     public float patience;
 

@@ -16,6 +16,7 @@ MonoBehaviour:
   stageName: name
   recipesOrders:
   - {fileID: 11400000, guid: 27baf830f492dd3438eb74a00e9eb11b, type: 2}
+  - {fileID: 11400000, guid: 27baf830f492dd3438eb74a00e9eb11b, type: 2}
   ChickenPrefab: {fileID: 882113749476736007, guid: 5b5954732eb967d4785c8482bf9278ed, type: 3}
   DuckPrefab: {fileID: 5754274221369468169, guid: 63b1a81474859594390e1705c7df8586, type: 3}
   TurkeyPrefab: {fileID: 5700941242186387313, guid: 7d110d7fe4262c94595aca1e24fff141, type: 3}

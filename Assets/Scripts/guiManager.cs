@@ -13,11 +13,11 @@ public class guiManager : MonoBehaviour
     [Header("Order Display")]   
     public RectTransform orderListRect;
     public GameObject orderPrefab;
-    public Texture2D breading1;
-    public Texture2D breading2;
+    public Sprite breading1;
+    public Sprite breading2;
 
     [ContextMenu("update")]
-    void UpdateOrderList()
+    public void UpdateOrderList()
     {
         for (int i=0; i <  orderListRect.transform.childCount; i++)
         {
@@ -27,10 +27,35 @@ public class guiManager : MonoBehaviour
         DeliveryBehavior delivery = FindObjectOfType<DeliveryBehavior>();
         foreach (Order order in delivery.activeOrderList)
         {
-            GameObject go = GameObject.Instantiate(orderPrefab);
-            go.transform.SetParent(orderListRect);
+            GameObject go = GameObject.Instantiate(orderPrefab, orderListRect);
+            //go.transform.SetParent(orderListRect);
             OrderGUI goGui = go.GetComponent<OrderGUI>();
-            
+
+            Recipe recipe = order.FoodItems[0]; //TODO make recusive
+
+            List<Image> goGuiImages = new List<Image>();
+            goGuiImages.Add(goGui.BreadingIcon1);
+            goGuiImages.Add(goGui.BreadingIcon2);
+
+            goGui.RecipeIcon.sprite = order.icon;
+            if (recipe.BreadingLayers.Count > 1)
+            {
+                for (int i=0; i< recipe.BreadingLayers.Count; i++)
+                {
+                    if (recipe.BreadingLayers[i] == FoodBehavior.BreadingType.Breading)
+                    {
+                        goGuiImages[i].sprite = breading1;
+                    }
+
+                    //if (recipe.BreadingLayers[i] == FoodBehavior.BreadingType.Spicy)
+                    //{
+                    //    goGuiImages[i].sprite = breading2;
+                    //}
+                }
+            }
+            orderListRect.ForceUpdateRectTransforms();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(orderListRect);
+            LayoutRebuilder.MarkLayoutForRebuild(orderListRect);
         }
     }
 

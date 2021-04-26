@@ -91,6 +91,9 @@ public class DeliveryBehavior : MonoBehaviour
             print("test" + sceneWrangler.currentSceneContainer);
             activeOrderList.AddRange(settings.recipesOrders);
         }
+
+        guiManager gui = FindObjectOfType<guiManager>();
+        gui.UpdateOrderList();
     }
 
 

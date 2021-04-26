@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FreshChicken_Order
   m_EditorClassIdentifier: 
   recipeName: Fresh Chicken
-  icon: {fileID: 2800000, guid: 215f276adf0330d4d869640568f501a9, type: 3}
+  icon: {fileID: 21300000, guid: 195046632fd153f459db97410a6aab45, type: 3}
   FoodItems:
   - {fileID: 11400000, guid: d2cf1719f394fc04bb212ef33b6ae7b7, type: 2}
+  patience: 0

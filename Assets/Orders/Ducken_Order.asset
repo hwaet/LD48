@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ducken_Order
   m_EditorClassIdentifier: 
   recipeName: Ducken
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3c4ea1d5342086a48a4bcfb3ee594671, type: 3}
   FoodItems:
   - {fileID: 11400000, guid: 189549ceccaa4224593c2300ca12c524, type: 2}
+  patience: 0
