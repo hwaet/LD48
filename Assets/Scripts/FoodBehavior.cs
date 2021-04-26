@@ -37,7 +37,7 @@ public class FoodBehavior : MonoBehaviour
     
     [HideInInspector()]
     public bool cooking = false;
-    [HideInInspector()]
+    //[HideInInspector()]
     public List<BreadingType> BreadingLayers; 
 
     private new Rigidbody rigidbody;
@@ -127,7 +127,7 @@ public class FoodBehavior : MonoBehaviour
     {
         foreach (Material material in materials)
         {
-            material.SetFloat("cookedState", cookingValue / cookTime);
+            material.SetFloat("cookedState", cookingValue / (cookTime*2));
         }
     }
 
