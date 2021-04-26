@@ -50,6 +50,9 @@ public class FoodBehavior : MonoBehaviour
         this.rigidbody = GetComponent<Rigidbody>();
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
+        foreach(Transform child in transform) {
+            this.materials.AddRange(child.GetComponent<MeshRenderer>().materials.ToList());
+        }
         this.grabbable = GetComponent<Grabbable>();
         this.BreadingLayers = new List<BreadingType> { BreadingType.Fresh };
     }
@@ -102,22 +105,34 @@ public class FoodBehavior : MonoBehaviour
     IEnumerator Cooking() {
         float startTime = Time.time;
         cooking = true;
+        float impulse = 0;
         while(cooking) {
             cookingValue += Time.deltaTime;
             UpdateMaterial();
             switch (doneness) {
                 case Doneness.Raw:
+                    impulse = Random.Range(.0025f, .0075f);
                     if(cookingValue > cookTime) {
                         doneness = Doneness.Cooked;
                         Debug.Log("Cooked");
                     }
                     break;
                 case Doneness.Cooked:
+                    impulse = Random.Range(0, .005f);
                     if (cookingValue > cookTime * 2) {
                         doneness = Doneness.Burnt;
                         Debug.Log("Burnt");
                     }
                     break;
+                case Doneness.Burnt:
+                    impulse = 0;
+                    break;
+            }
+
+            rigidbody.AddForce(-Physics.gravity * impulse, ForceMode.Impulse);
+
+            if (Time.time - startTime > cookTime * 5) {
+                Destroy(this.gameObject);
             }
             yield return new WaitForEndOfFrame();
         }
