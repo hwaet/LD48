@@ -13,8 +13,8 @@ public class guiManager : MonoBehaviour
     [Header("Order Display")]   
     public RectTransform orderListRect;
     public GameObject orderPrefab;
-    public GameObject breading1;
-    public GameObject breading2;
+    public Texture2D breading1;
+    public Texture2D breading2;
 
     [ContextMenu("update")]
     void UpdateOrderList()

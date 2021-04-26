@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody))]
 public class HandBehavior : MonoBehaviour
@@ -74,7 +75,12 @@ public class HandBehavior : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        this.sceneWrangler = FindObjectOfType<SceneWrangler>();
+
+        List<SceneWrangler> wranglers = FindObjectsOfType<SceneWrangler>().ToList();
+        foreach (SceneWrangler wrangler in wranglers)
+        {
+            if (wrangler.levelState == LevelLoadingProcess.Idle) this.sceneWrangler = wrangler;
+        }
     }
 
     // Update is called once per frame

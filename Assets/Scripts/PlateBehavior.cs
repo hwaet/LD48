@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Collider))]
 public class PlateBehavior : MonoBehaviour
@@ -37,6 +38,12 @@ public class PlateBehavior : MonoBehaviour
         grabbable.OnPickup += OnPickup;
         grabbable.OnDrop += OnDrop;
         this.sceneWrangler = FindObjectOfType<SceneWrangler>();
+
+        List<SceneWrangler> wranglers = FindObjectsOfType<SceneWrangler>().ToList();
+        foreach (SceneWrangler wrangler in wranglers)
+        {
+            if (wrangler.levelState == LevelLoadingProcess.Idle) this.sceneWrangler = wrangler;
+        }
     }
 
     private void OnPickup(HandBehavior hand) {
