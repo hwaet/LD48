@@ -19,6 +19,8 @@ MonoBehaviour:
   stageSettings: {fileID: 11400000, guid: 53e69a4e3e068d444be637b4b07709cb, type: 2}
   backgrounds:
   - {fileID: 102900000, guid: 40fc6844395cf8346be5746d9b323858, type: 3}
+  - {fileID: 102900000, guid: 4bda90fec3683e24fa799a662c5a8f8e, type: 3}
   backgroundNames:
   - background
+  - stage_01_tutorial
   guiIsActive: 1
