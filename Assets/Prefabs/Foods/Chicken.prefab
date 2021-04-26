@@ -117,10 +117,8 @@ MonoBehaviour:
   foodType: 1
   cookTime: 5
   doneness: 0
-  stuffableWith: 0
   cooking: 0
   BreadingLayers: 
-  Stuffings: []
 --- !u!114 &1554929112170920336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 0}
+  colliders: []
   rigidbody: {fileID: 0}
   holder: {fileID: 0}
 --- !u!136 &9202133889790636953

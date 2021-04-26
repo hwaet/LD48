@@ -1352,6 +1352,9 @@ MonoBehaviour:
   activeOrderList: []
   orderAddTimes: []
   orderAddDelay: 0
+  trashLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!65 &1061667535
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2548,6 +2551,26 @@ PrefabInstance:
       propertyPath: zone
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 551061781557414650, guid: c0b2481eed692bd418fbcfd608935da1, type: 3}
+      propertyPath: foodMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 551061781557414650, guid: c0b2481eed692bd418fbcfd608935da1, type: 3}
+      propertyPath: frierMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 551061781557414650, guid: c0b2481eed692bd418fbcfd608935da1, type: 3}
+      propertyPath: plateMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 551061781557414650, guid: c0b2481eed692bd418fbcfd608935da1, type: 3}
+      propertyPath: trashMask.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 551061781557414650, guid: c0b2481eed692bd418fbcfd608935da1, type: 3}
+      propertyPath: coolerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 3881566115755285384, guid: c0b2481eed692bd418fbcfd608935da1, type: 3}
       propertyPath: m_Name
       value: LeftHand
@@ -2975,6 +2998,26 @@ PrefabInstance:
     - target: {fileID: 6666479043763854052, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
       propertyPath: pickupSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666479043763854052, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: foodMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666479043763854052, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: frierMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666479043763854052, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: plateMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666479043763854052, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: trashMask.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666479043763854052, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
+      propertyPath: coolerMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7002484420207117718, guid: fc9a9f3c4bc3dd641a8b9ad520bdb233, type: 3}
       propertyPath: m_Materials.Array.data[0]

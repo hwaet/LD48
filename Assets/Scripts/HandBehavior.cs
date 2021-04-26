@@ -63,10 +63,11 @@ public class HandBehavior : MonoBehaviour
     public new Collider collider;
 
     [Header("Layer Masks")]
-    public LayerMask frierZoneMask;
-    public LayerMask coolerZoneMask;
-    public LayerMask foodZoneMask;
-    public LayerMask plateZoneMask;
+    public LayerMask frierMask;
+    public LayerMask coolerMask;
+    public LayerMask foodMask;
+    public LayerMask plateMask;
+    public LayerMask trashMask;
     private SceneWrangler sceneWrangler;
 
 
@@ -135,7 +136,7 @@ public class HandBehavior : MonoBehaviour
                     holding = null;
                     break;
                 case "fryBasket":
-                    if(zone == Zone.Frier) {
+                    if (zone == Zone.Frier) {
                         holding.Drop(this);
                         holding = null;
                         break;
@@ -146,48 +147,43 @@ public class HandBehavior : MonoBehaviour
                     break;
             }
         }
-        else { 
-            RaycastHit hit;
-            if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 10, frierZoneMask)) {
-                if (hit.transform.tag == "fryBasket") {
-                    StartCoroutine(PickupAndRotate(hit.transform.gameObject));
-                }
+        else {
+            RaycastHit[] hits;
+            int layerMask = frierMask | trashMask;
+            string[] tagPriority;
+            switch (zone) {
+                case Zone.Cooler:
+                    layerMask |= coolerMask;
+                    tagPriority = new string[] { "fryBasket", "cooler", "trash" };
+                    break;
+                case Zone.Platting:
+                    layerMask |= plateMask | foodMask;
+                    tagPriority = new string[] { "fryBasket", "food", "trash", "plate" };
+                    break;
+                case Zone.Breading:
+                case Zone.Prep:
+                    layerMask |= foodMask;
+                    tagPriority = new string[] { "food", "fryBasket", "trash" };
+                    break;
+                case Zone.Frier:
+                    tagPriority = new string[] { "fryBasket", "trash" };
+                    break;
+                default:
+                    layerMask |= foodMask;
+                    tagPriority = new string[] { "fryBasket", "trash", "food" };
+                    break;
             }
-            if (pickupState != PickupState.Seeking) {
-                switch (zone) {
-                    case Zone.Cooler:
-                        if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 10, coolerZoneMask)) {
-                            if (hit.transform.tag == "cooler") {
-                                StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                            }
-                        }
+            Debug.Log("SphereCasting!");
+            hits = Physics.SphereCastAll(this.transform.position, 1, -this.transform.up, 10, layerMask);
+            Debug.LogFormat("We hit:{0}", string.Join(",", hits));
+            foreach (string checkTag in tagPriority) {
+                foreach (RaycastHit hit in hits) {
+                    if (hit.transform.CompareTag(checkTag)) {
+                        StartCoroutine(PickupAnimation(hit.transform.gameObject));
                         break;
-
-
-                    case Zone.Prep:
-                    case Zone.Breading:
-                        if (Physics.SphereCast(this.transform.position, 1, -this.transform.up, out hit, 10, foodZoneMask)) {
-                            if (hit.transform.tag == "food") {
-                                StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                            }
-                        }
-                        break;
-
-                    case Zone.Platting:
-                        if (Physics.SphereCast(this.transform.position, 1,  -this.transform.up, out hit, 10, plateZoneMask)) {
-                            Debug.LogFormat("Raycast Hit {0}", hit.transform.name);
-                            if (hit.transform.tag == "plate") {
-                                PlateBehavior plate = hit.transform.GetComponent<PlateBehavior>();
-                                if (!plate.Open) {
-                                    StartCoroutine(PickupAnimation(hit.transform.gameObject));
-                                }
-                                else if (plate.contents.Count > 0) {
-                                    plate.Close();
-                                }
-                            }
-                        }
-                        break;
+                    }
                 }
+                if (pickupState == PickupState.Seeking) break;
             }
         }
     }
@@ -196,6 +192,18 @@ public class HandBehavior : MonoBehaviour
         Grabbable targetGrabbable = target.GetComponent<Grabbable>();
         if (targetGrabbable != null && targetGrabbable.Held) {
             yield break;
+        }
+        switch (target.tag) {
+            case "fryBasket":
+                yield return PickupAndRotate(target);
+                yield break;
+            case "plate":
+                PlateBehavior plate = target.GetComponent<PlateBehavior>();
+                if (plate.Open) {
+                    plate.Close();
+                    yield break;
+                }
+                break;
         }
 
         pickupState = PickupState.Seeking;
@@ -230,11 +238,6 @@ public class HandBehavior : MonoBehaviour
 
 
     IEnumerator PickupAndRotate(GameObject target) {
-        Grabbable targetGrabbable = target.GetComponent<Grabbable>();
-        if (targetGrabbable != null && targetGrabbable.Held) {
-            yield break;
-        }
-
         pickupState = PickupState.Seeking;
         pickupTarget = target;
         Vector3 currPos = transform.position;

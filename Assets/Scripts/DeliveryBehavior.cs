@@ -146,6 +146,8 @@ public class DeliveryBehavior : MonoBehaviour
         }
         else {
             Rigidbody plateBody = plate.GetComponent<Rigidbody>();
+            plate.gameObject.layer = 12;
+            plate.tag = "trash";
             plateBody.AddForce((Vector3.up - Vector3.forward) * 10, ForceMode.Impulse);
         }
 
