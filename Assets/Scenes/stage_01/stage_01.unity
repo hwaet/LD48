@@ -123,11 +123,93 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &32777212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+  m_PrefabInstance: {fileID: 114650489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &53029094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 676956b924839974fac5497c000c3ae9, type: 3}
   m_PrefabInstance: {fileID: 341897155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &114650489
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 941725412}
+    m_Modifications:
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501482, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501485, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: ShapeModule.type
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501485, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501485, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501485, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501485, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359103978311501487, guid: 660570d13320243438d46f7bd103d146, type: 3}
+      propertyPath: m_Name
+      value: boilEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 660570d13320243438d46f7bd103d146, type: 3}
 --- !u!4 &290663168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4323134445506133110, guid: 65c19b94988dda940a9484323cbdf246, type: 3}
@@ -996,7 +1078,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0.409, z: 0}
   m_LocalScale: {x: 1.89, y: 1.12, z: 2.49}
-  m_Children: []
+  m_Children:
+  - {fileID: 32777212}
   m_Father: {fileID: 608943718}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
