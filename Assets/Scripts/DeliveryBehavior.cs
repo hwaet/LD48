@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,10 +15,22 @@ public class DeliveryBehavior : MonoBehaviour
     public float orderAddDelay;
     private float lastAddTime;
 
+    bool armVictoryState = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        reloadOrderList();
+        //reloadOrderList();
+    }
+
+    private void OnEnable()
+    {
+        SceneWrangler.sceneLoadComplete += reloadOrderList;
+    }
+
+    private void OnDisable()
+    {
+        SceneWrangler.sceneLoadComplete -= reloadOrderList;
     }
 
     private void Update() {
@@ -53,7 +66,15 @@ public class DeliveryBehavior : MonoBehaviour
     [ContextMenu("reload orders")]
     private void reloadOrderList()
     {
-        sceneWrangler = FindObjectOfType<SceneWrangler>();
+        List<SceneWrangler> wranglers = FindObjectsOfType<SceneWrangler>().ToList();
+        foreach (SceneWrangler wrangler in wranglers)
+        {
+            if (wrangler.levelState == LevelLoadingProcess.Idle) sceneWrangler = wrangler;
+        }
+
+
+        print("reloading order list");
+        armVictoryState = true;
         StageSettings_ld48 settings = (StageSettings_ld48)sceneWrangler.currentSceneContainer.stageSettings;
         orderQueue.Clear();
         activeOrderList.Clear();
@@ -67,6 +88,7 @@ public class DeliveryBehavior : MonoBehaviour
             lastAddTime = Time.time;
         }
         else {
+            print("test" + sceneWrangler.currentSceneContainer);
             activeOrderList.AddRange(settings.recipesOrders);
         }
     }
@@ -115,7 +137,7 @@ public class DeliveryBehavior : MonoBehaviour
     [ContextMenu("check for victory condition")]
     public void checkForVictory()
     {
-        if (activeOrderList.Count == 0)
+        if ((activeOrderList.Count == 0) && (armVictoryState == true))
         {
             Debug.Log("You win this stage!!!!!");
             sceneWrangler.loadTargetContainer();

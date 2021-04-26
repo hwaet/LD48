@@ -1,0 +1,19 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:greyLight;color:RGBA(0.843, 0.902, 0.953, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:green;color:RGBA(0.341, 0.737, 0.592, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:_defaultMat;color:RGBA(1.000, 1.000, 1.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:yellow;color:RGBA(0.961, 0.725, 0.259, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:pink;color:RGBA(1.000, 0.537, 0.561, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownLight;color:RGBA(0.976, 0.773, 0.549, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brownDark;color:RGBA(0.566, 0.196, 0.033, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:brown;color:RGBA(0.683, 0.414, 0.248, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:stone;color:RGBA(0.628, 0.312, 0.000, 1.000);scale:(1.0, 1.0);texture:Wood/logs.png;shader:Default;valueA:0.5;valueB:0;]
+[name:custom9;color:RGBA(0.641, 0.350, 0.350, 1.000);scale:(1.0, 1.0);texture:Wood/logs.png;shader:Default;valueA:0.5;valueB:0.15;]
+
+:models
+
+[name:;collection:Castles;type:debris_stone;position:(0.0471, 0.0000, -0.0537);rotation:(0.0000, 0.0000, 0.0000);scale:(0.2100, 0.2000, 0.2500);group:;locked:False;hidden:False;materials:custom9;]
+[name:;collection:Castles;type:debris_stone;position:(-0.0529, 0.0000, 0.0463);rotation:(0.0000, 0.0000, 0.0000);scale:(0.2100, 0.2000, 0.2500);group:;locked:False;hidden:False;materials:custom9;]

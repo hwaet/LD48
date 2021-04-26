@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class guiManager : MonoBehaviour
 {
     SceneWrangler wrangler;
     public SceneContainer menuContainer;
+
+    [Header("Order Display")]
+    public Text orderName;
+    public Image orderIcon;
+    public Text orderContents;
 
     //void OnEnable ()
     //{
