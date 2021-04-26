@@ -11,6 +11,8 @@ public class PlateBehavior : MonoBehaviour
 
     public List<Vector3> snapSlots = new List<Vector3>();
 
+    public bool plateIsUsed = false;
+
     public bool OrderFull {
         get {
             return contents.Count == snapSlots.Count;
@@ -114,7 +116,8 @@ public class PlateBehavior : MonoBehaviour
 
     private void DeliverMe() {
         GameObject deliveryZone = GameObject.FindGameObjectWithTag("delivery");
-        if ((deliveryZone != null) && (contents.Count != 0)) {
+        if ((deliveryZone != null) && (contents.Count != 0) && (plateIsUsed==false)) {
+            plateIsUsed = true;
             DeliveryBehavior deliveryBehavior = deliveryZone.GetComponent<DeliveryBehavior>();
             deliveryBehavior.evaluatePlate(this);
         }
