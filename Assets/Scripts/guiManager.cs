@@ -10,10 +10,29 @@ public class guiManager : MonoBehaviour
     SceneWrangler wrangler;
     public SceneContainer menuContainer;
 
-    [Header("Order Display")]
-    public Text orderName;
-    public Image orderIcon;
-    public Text orderContents;
+    [Header("Order Display")]   
+    public RectTransform orderListRect;
+    public GameObject orderPrefab;
+    public GameObject breading1;
+    public GameObject breading2;
+
+    [ContextMenu("update")]
+    void UpdateOrderList()
+    {
+        for (int i=0; i <  orderListRect.transform.childCount; i++)
+        {
+            print("delete" + (orderListRect.transform.GetChild(i).name));
+            GameObject.Destroy(orderListRect.transform.GetChild(i).gameObject);
+        }
+        DeliveryBehavior delivery = FindObjectOfType<DeliveryBehavior>();
+        foreach (Order order in delivery.activeOrderList)
+        {
+            GameObject go = GameObject.Instantiate(orderPrefab);
+            go.transform.SetParent(orderListRect);
+            OrderGUI goGui = go.GetComponent<OrderGUI>();
+            
+        }
+    }
 
     //void OnEnable ()
     //{
