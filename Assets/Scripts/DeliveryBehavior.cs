@@ -94,12 +94,12 @@ public class DeliveryBehavior : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other) {
+  /*  private void OnTriggerEnter(Collider other) {
         if(other.tag == "plate") {
             PlateBehavior plate = other.GetComponent<PlateBehavior>();
             evaluatePlate(plate);
         }
-    }
+    }*/
 
     // Update is called once per frame
     public void evaluatePlate(PlateBehavior plate) {
@@ -125,13 +125,26 @@ public class DeliveryBehavior : MonoBehaviour
             if (enforceTime) {
                 orderAddTimes.RemoveAt(orderHit);
             }
-            Destroy(plate.gameObject);
+            StartCoroutine(OrderResult(plate, true));
+            
         }
         else {
             Debug.Log("Incorrect Delivery!");
             //could be fun to throw the plate back rather than just destroy it
+            StartCoroutine(OrderResult(plate, false));
+        }
+    }
+
+    IEnumerator OrderResult(PlateBehavior plate, bool success) {
+        yield return new WaitForSeconds(1);
+        if (success) {
             Destroy(plate.gameObject);
         }
+        else {
+            Rigidbody plateBody = plate.GetComponent<Rigidbody>();
+            plateBody.AddForce((Vector3.up - Vector3.forward) * 10, ForceMode.Impulse);
+        }
+
     }
 
     [ContextMenu("check for victory condition")]
