@@ -356,7 +356,7 @@ public class HandBehavior : MonoBehaviour
                                 if (otherFood.doneness != FoodBehavior.Doneness.Raw) {
                                     //form the turducken
                                     Debug.Log("Form the Turducken!");
-                                    GameObject turducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
+                                    GameObject turducken = Instantiate(settings.TurduckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
                                     Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
                                     this.holding = turduckenGrabbable;
                                     turduckenGrabbable.Pickup(this);
