@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6666479043763854057}
   - component: {fileID: 6666479043763854052}
   m_Layer: 10
-  m_Name: hand
+  m_Name: RightHand
   m_TagString: hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,15 +168,18 @@ MonoBehaviour:
   dumpAngle: {x: 0, y: 0, z: 0.86602545, w: 0.49999997}
   rigidbody: {fileID: 0}
   collider: {fileID: 0}
-  frierZoneMask:
+  frierMask:
     serializedVersion: 2
     m_Bits: 64
-  coolerZoneMask:
+  coolerMask:
     serializedVersion: 2
     m_Bits: 128
-  foodZoneMask:
+  foodMask:
     serializedVersion: 2
     m_Bits: 256
-  plateZoneMask:
+  plateMask:
     serializedVersion: 2
     m_Bits: 2048
+  trashMask:
+    serializedVersion: 2
+    m_Bits: 4096

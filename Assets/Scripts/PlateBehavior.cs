@@ -31,6 +31,11 @@ public class PlateBehavior : MonoBehaviour
     private Grabbable grabbable;
     private bool inDelivery = false;
     private SceneWrangler sceneWrangler;
+    private AudioSource audioSource;
+
+    private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +95,9 @@ public class PlateBehavior : MonoBehaviour
             if(contents.Count == snapSlots.Count) {
                 Close();
             }
+        }
+        if (collision.gameObject.layer == 9) {
+            audioSource.Play();
         }
     }
 

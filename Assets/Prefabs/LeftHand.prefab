@@ -72,18 +72,21 @@ MonoBehaviour:
   dumpAngle: {x: 0, y: 0, z: 0.9659258, w: 0.25881907}
   rigidbody: {fileID: 0}
   collider: {fileID: 0}
-  frierZoneMask:
+  frierMask:
     serializedVersion: 2
     m_Bits: 64
-  coolerZoneMask:
+  coolerMask:
     serializedVersion: 2
     m_Bits: 128
-  foodZoneMask:
+  foodMask:
     serializedVersion: 2
     m_Bits: 256
-  plateZoneMask:
+  plateMask:
     serializedVersion: 2
     m_Bits: 2048
+  trashMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &5949694063448289517
 GameObject:
   m_ObjectHideFlags: 0

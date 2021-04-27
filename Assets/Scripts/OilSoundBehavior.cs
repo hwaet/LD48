@@ -55,7 +55,6 @@ public class OilSoundBehavior : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-        Debug.Log("Oil on Trigger Exit");
         if (other.CompareTag("food")) {
             foodsInOil -= 1;
         }

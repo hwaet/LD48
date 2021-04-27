@@ -271,7 +271,7 @@ public class HandBehavior : MonoBehaviour
             rigidbody.MoveRotation(Quaternion.Slerp(targetRotation,
                                         Quaternion.identity,
                                         1 - (hoverHeight - transform.position.y) / translationDistance));
-            Debug.Log("Returning");
+            //Debug.Log("Returning");
             yield return new WaitForFixedUpdate();
         }
 
