@@ -67,9 +67,9 @@ public class PlateBehavior : MonoBehaviour
 
     IEnumerator CloseAnim() {
         float callTime = Time.fixedTime;
-        Quaternion startRot = transform.rotation;
+        float currRot = transform.rotation.eulerAngles.z;
         while (Time.fixedTime - callTime < closeTime) {
-            lid.rotation = Quaternion.Slerp(startRot, Quaternion.identity, (Time.fixedTime - callTime) / closeTime);
+            lid.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(currRot, 180, (Time.fixedTime - callTime) / closeTime));
             yield return new WaitForFixedUpdate();
         }
         isOpen = false;
@@ -77,7 +77,7 @@ public class PlateBehavior : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.LogFormat("{0} Landed on a plate", collision.transform.name);
+        //Debug.LogFormat("{0} Landed on a plate", collision.transform.name);
         if(!OrderFull && collision.transform.tag == "food") {
             FoodBehavior fb = collision.transform.GetComponent<FoodBehavior>();
             contents.Add(fb);

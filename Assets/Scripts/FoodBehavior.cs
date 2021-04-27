@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(Grabbable))]
+[RequireComponent(typeof(Rigidbody), typeof(Grabbable), typeof(AudioSource))]
 public class FoodBehavior : MonoBehaviour
 {
     public enum Doneness {
@@ -43,6 +43,11 @@ public class FoodBehavior : MonoBehaviour
     private new Rigidbody rigidbody;
     private new Collider collider;
     private Grabbable grabbable;
+    private AudioSource audioSource;
+
+    private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +82,9 @@ public class FoodBehavior : MonoBehaviour
         if (collision.transform.tag == "plate") {
             this.rigidbody.isKinematic = true;
             this.transform.parent = collision.transform;
+        }
+        if(collision.gameObject.layer == 9) {
+            audioSource.Play();
         }
     }
 
