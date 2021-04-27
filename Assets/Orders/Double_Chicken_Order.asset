@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Double_Chicken_Order
   m_EditorClassIdentifier: 
   recipeName: Double Chicken
-  icon: {fileID: 21300000, guid: 214bc516938cdf54e87ff6b526e86c66, type: 3}
+  icon: {fileID: 21300000, guid: d31d382969d59f9469747164c4b37ec1, type: 3}
   FoodItems:
   - {fileID: 11400000, guid: 63a85482c5f54bd498f4a1f4f83b7d08, type: 2}
   - {fileID: 11400000, guid: 63a85482c5f54bd498f4a1f4f83b7d08, type: 2}
