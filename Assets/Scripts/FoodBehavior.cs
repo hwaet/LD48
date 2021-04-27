@@ -44,6 +44,8 @@ public class FoodBehavior : MonoBehaviour
     private new Collider collider;
     private Grabbable grabbable;
     private AudioSource audioSource;
+    private ParticleSystem whiteSmoke;
+    private ParticleSystem blackSmoke;
 
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
@@ -56,7 +58,16 @@ public class FoodBehavior : MonoBehaviour
         this.collider = GetComponent<Collider>();
         this.materials = gameObject.GetComponent<MeshRenderer>().materials.ToList();
         foreach(Transform child in transform) {
-            this.materials.AddRange(child.GetComponent<MeshRenderer>().materials.ToList());
+            
+            if(child.name == "whiteSmokeParticles") {
+                whiteSmoke = child.GetComponent<ParticleSystem>();
+            }
+            else if(child.name == "blackSmokeParticles") {
+                blackSmoke = child.GetComponent<ParticleSystem>();
+            }
+            else { 
+                this.materials.AddRange(child.GetComponent<MeshRenderer>().materials.ToList());
+            }
         }
         this.grabbable = GetComponent<Grabbable>();
         this.BreadingLayers = new List<BreadingType> { BreadingType.Fresh };
@@ -128,6 +139,7 @@ public class FoodBehavior : MonoBehaviour
                     if(cookingValue > cookTime) {
                         doneness = Doneness.Cooked;
                         Debug.Log("Cooked");
+                        whiteSmoke?.Play();
                     }
                     break;
                 case Doneness.Cooked:
@@ -135,6 +147,8 @@ public class FoodBehavior : MonoBehaviour
                     if (cookingValue > cookTime * 2) {
                         doneness = Doneness.Burnt;
                         Debug.Log("Burnt");
+                        whiteSmoke?.Stop();
+                        blackSmoke?.Play();
                     }
                     break;
                 case Doneness.Burnt:

@@ -12,7 +12,7 @@ public class Music : MonoBehaviour {
 	//public Settings globalSettings;
 
 	float origVolume;
-	float maxVolume;
+	public float maxVolume;
 	AudioSource audioSource;
 
 	// Use this for initialization
@@ -51,7 +51,7 @@ public class Music : MonoBehaviour {
 	public void updateVolume() {
 		//if (globalSettings!=null) {
 		//	maxVolume = globalSettings.musicVolume;
-		maxVolume = 1;
+	//	maxVolume = 1;
 		if ((fadeIn==false) &&  (fadeIn==false)) {
 			audioSource.volume = maxVolume;
 		}

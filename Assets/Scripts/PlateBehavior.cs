@@ -67,6 +67,9 @@ public class PlateBehavior : MonoBehaviour
     }
 
     public void Close() {
+        if(contents.Count == 0) {
+            return;
+        }
         StartCoroutine(CloseAnim());
     }
 

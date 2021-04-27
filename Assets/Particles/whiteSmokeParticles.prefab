@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -105,7 +105,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -667,7 +667,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 2, y: 2, z: 2}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -990,13 +990,22 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0.06734006
         - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: 0.25348496
-          outSlope: 0.25348496
+          time: 0.15060464
+          value: 0.5002927
+          inSlope: 0.013634014
+          outSlope: 0.013634014
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.3198654
+          inWeight: 0.04493472
+          outWeight: 0.07479255
+        - serializedVersion: 3
+          time: 0.93273926
+          value: 0
+          inSlope: 0.40898758
+          outSlope: 0.40898758
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.054019716
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
