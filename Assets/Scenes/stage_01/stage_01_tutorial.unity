@@ -182,7 +182,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 148cfd274b37982488bb72c1754f1b06, type: 3}
-    m_FontSize: 18
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -193,21 +193,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Move the basket to the takeout containers in the back
+  m_Text: 'Move the basket to the takeout containers in the back and dump the chicken
+    in a continer. Press on the container to close the lid.
 
 
-
-    perform an
-    action to dump the chicken into the container
-
+    Carry the container
+    to the back window and set it down to deliver it to the customer
 
 
-
-
-
-
-    [picture of takeout
-    container with chicken]'
+    If you
+    get the order wrong, they''ll send it back.'
 --- !u!222 &56043125
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -618,7 +613,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 148cfd274b37982488bb72c1754f1b06, type: 3}
-    m_FontSize: 18
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -630,8 +625,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Use WASD to move the left hand and Up/Down/Left/Right to move the right
-    hand\r\n\r\n\r\r\n\r\nYour hands can perform actions on objects. The left hand
-    uses left-shift; the right hand uses right-control\r. Try to pick up a chicken
+    hand\r\n\r\n\r\r\nYour hands can perform actions on objects. The left hand uses
+    left-shift; the right hand uses right-control\r. \n\n\nTry to pick up a chicken
     leg from the bottom-right cooler"
 --- !u!222 &762995009
 CanvasRenderer:
@@ -935,7 +930,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 148cfd274b37982488bb72c1754f1b06, type: 3}
-    m_FontSize: 18
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -949,18 +944,12 @@ MonoBehaviour:
   m_Text: 'Drop the chicken into the deep fryer in the middle of the table
 
 
+    When
+    the chicken has browned, pick up the fryer basket to remove it from the oil.
 
 
-
-    [picture
-    of deep fryer]
-
-
-
-
-
-    When the chicken has browned, pick up the fryer basket
-    to remove it from the oil. Don''t let it burn!'
+    Don''t
+    let it burn!'
 --- !u!222 &1059945950
 CanvasRenderer:
   m_ObjectHideFlags: 0
