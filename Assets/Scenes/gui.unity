@@ -894,12 +894,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Customers may order different types of chicken
-
-    
-
-    Make sure
-    to match the customer''s request exactly, or the order will be rejected!'
+  m_Text: "You can also cook ducks (middle-right cooler) and turkeys (upper-right
+    cooler)s\n\nWhat's better than a combo meal of deep-fried chicken, deep-fried
+    duck, and deep-fried turkey?\r\n\r\nDeep-fried turducken - all three in one!\r"
 --- !u!222 &546294216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1291,13 +1288,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'To make Spicy Chicken, drop uncooked chicken on the lower plate to the
-    right to add breading, then drop the same chicken in the upper plate to the right
-    to add the spice mix
+  m_Text: 'To make a Turducken:
 
-    
+    1. stuff a breaded, fried chicken in a duck
 
-    Then fry and serve the chicken normally'
+    2.
+    bread and fry the ducken
+
+    3. stuff the breaded, fried ducken in a turkey
+
+    4.
+    bread and fry the turducken
+
+'
 --- !u!222 &747952337
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1557,12 +1560,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'To make Breaded Chicken, drop uncooked chicken on the lower plate to the
-    right to add breading
-
-    
-
-    Then fry and serve the chicken normally'
+  m_Text: "To stuff one bird inside another, hold one bird in each hand and mash
+    the hands together\r\n\r\nImportant: when stuffing a bird, the inner bird must
+    be fried already, and the outer bird must be uncooked. The stuffed bird can then
+    be fried for a double-deep-fry\r"
 --- !u!222 &855317545
 CanvasRenderer:
   m_ObjectHideFlags: 0
