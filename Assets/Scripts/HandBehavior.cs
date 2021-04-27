@@ -69,6 +69,7 @@ public class HandBehavior : MonoBehaviour
     public LayerMask plateMask;
     public LayerMask trashMask;
     private SceneWrangler sceneWrangler;
+    private ParticleSystem particleSystem;
 
 
     // Start is called before the first frame update
@@ -82,6 +83,13 @@ public class HandBehavior : MonoBehaviour
         {
             if (wrangler.levelState == LevelLoadingProcess.Idle) this.sceneWrangler = wrangler;
         }
+
+        foreach(Transform child in transform) {
+            if(child.name == "taDaParticles") {
+                particleSystem = child.GetComponentInChildren<ParticleSystem>();
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -345,6 +353,7 @@ public class HandBehavior : MonoBehaviour
                                     Debug.Log("Form the Ducken!");
                                     GameObject ducken = Instantiate(settings.DuckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
                                     Grabbable duckenGrabbable = ducken.GetComponent<Grabbable>();
+                                    particleSystem.Play();
                                     this.holding = duckenGrabbable;
                                     duckenGrabbable.Pickup(this);
                                     otherHand.holding = null;
@@ -358,6 +367,7 @@ public class HandBehavior : MonoBehaviour
                                     Debug.Log("Form the Turducken!");
                                     GameObject turducken = Instantiate(settings.TurduckenPrefab, thisFood.transform.position, thisFood.transform.rotation) as GameObject;
                                     Grabbable turduckenGrabbable = turducken.GetComponent<Grabbable>();
+                                    particleSystem.Play();
                                     this.holding = turduckenGrabbable;
                                     turduckenGrabbable.Pickup(this);
                                     otherHand.holding = null;
